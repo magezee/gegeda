@@ -1,3 +1,11 @@
+.markdown-body {
+  margin: 20px 0 100px 0;
+}
+
+.markdown-body div {
+  border-radius: 5px;
+}
+
 .markdown-body .octicon {
   display: inline-block;
   fill: currentColor;
@@ -817,13 +825,19 @@
   word-break: normal;
 }
 
-.markdown-body .highlight pre,
-.markdown-body pre {
+.markdown-body .highlight pre {
   padding: 16px;
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
   background-color: #f6f8fa;
+  border-radius: 3px;
+}
+
+.markdown-body pre {
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
   border-radius: 3px;
 }
 
@@ -982,10 +996,4 @@
 .markdown-body .task-list-item input {
   margin: 0 .2em .25em -1.6em;
   vertical-align: middle;
-}
-
-body {
-  h2 {
-    color: rebeccapurple;
-  }
 }

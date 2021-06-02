@@ -16,9 +16,7 @@ const getCssLoaders = () => {
     {
       loader: 'css-loader',
       options: {
-        modules: {
-          localIdentName: '[local]--[hash:base64:5]'
-        },
+        modules: false,
         sourceMap: isDevelopment,
       }
     }
@@ -62,6 +60,8 @@ module.exports = {
       'src': path.resolve(PROJECT_PATH, './src'),
       'components': path.resolve(PROJECT_PATH, './src/components'),
       'utils': path.resolve(PROJECT_PATH, './src/utils'),
+      'markdown': path.resolve(PROJECT_PATH, './src/markdown'),
+      'constant': path.resolve(PROJECT_PATH, './src/constant') 
     }
   },
   module: {
@@ -98,6 +98,12 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sourceMap: isDevelopment,
+            }
+          },
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: path.resolve(PROJECT_PATH, './src/styles/index.scss')
             }
           }
         ]

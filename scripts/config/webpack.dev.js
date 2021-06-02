@@ -12,11 +12,19 @@ module.exports = merge(common, {
   target: 'web',
   output: {
     filename: 'js/[name].js',
-    path: path.resolve(PROJECT_PATH, './dist')
+    path: path.resolve(PROJECT_PATH, './dist'),
+    publicPath: '/dist',
   },
   devServer: {
     host: SERVER_HOST,
     port: SERVER_PORT,
+    historyApiFallback: {
+      rewrites: [{
+				from: /.*/g,
+				to: path.join(PROJECT_PATH, './public/index.html')
+			}],
+
+    },
     stats: 'errors-only',         
     clientLogLevel: 'none',     
     compress: true,               

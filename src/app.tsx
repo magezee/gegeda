@@ -1,14 +1,28 @@
 import React from 'react'
-import style from './app.scss'
-import Test from 'components/tt'
+import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 
-import gugu from './gugu.jpg'
+import Loading from 'src/components/loading'
+import Header from 'src/components/header'
+import routers from './routers'
+
+import './app.scss'
+
 const App:React.FC<any> = () => {
   return (
-    <div >
-      <Test />
-      
-    </div>
+    <Router>
+      <div className="content">
+        <div className="header">
+          <Header />
+        </div>
+        <div className="main">
+          <React.Suspense fallback={<Loading />}>
+            <Switch>
+              {routers.map((route) => <Route key={route.id} path={route.path} component={route.compoment} exact={route.exact} />)}
+            </Switch>
+          </React.Suspense>
+        </div>
+      </div>
+    </Router>
   )
 }
 
