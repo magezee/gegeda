@@ -1,13 +1,12 @@
 import React from 'react'
 import RenderMd from 'src/components/render-md'
-import mdData from 'markdown/js/execution-context--call-stack.md'
+import mdData from 'markdown/js/execution-context--module.md'
 
 
-const CallStack:React.FC = () => {
+const Module:React.FC = () => {
   return (
     <RenderMd mdData={mdData}/>
   )
 }
 
-
-export default CallStack
+export default Module

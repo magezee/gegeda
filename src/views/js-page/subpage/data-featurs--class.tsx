@@ -1,13 +1,13 @@
 import React from 'react'
 import RenderMd from 'src/components/render-md'
-import mdData from 'markdown/js/data-type--base-type.md'
+import mdData from 'markdown/js/data-featurs--class.md'
 
 
-const BaseType:React.FC = () => {
+const Class_:React.FC = () => {
   return (
     <RenderMd mdData={mdData}/>
   )
 }
 
 
-export default BaseType
+export default Class_

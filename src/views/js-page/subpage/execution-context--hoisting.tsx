@@ -1,12 +1,12 @@
 import React from 'react'
 import RenderMd from 'src/components/render-md'
-import mdData from 'markdown/js/execution-context--context.md'
+import mdData from 'markdown/js/execution-context--hoisting.md'
 
-const Context:React.FC = () => {
+
+const Hoisting:React.FC = () => {
   return (
     <RenderMd mdData={mdData}/>
   )
 }
 
-
-export default Context
+export default Hoisting

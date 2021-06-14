@@ -1,13 +1,13 @@
 import React from 'react'
 import RenderMd from 'src/components/render-md'
-import mdData from 'markdown/js/data-type--type-checking.md'
+import mdData from 'markdown/js/data-featurs--object.md'
 
 
-const TypeChecking:React.FC = () => {
+const Object_:React.FC = () => {
   return (
     <RenderMd mdData={mdData}/>
   )
 }
 
 
-export default TypeChecking
+export default Object_
