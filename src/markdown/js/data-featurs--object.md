@@ -7,7 +7,7 @@
 对象的属性可以分为 `可枚举` 和 `不可枚举` ，由属性 `enumerable` 决定，不可枚举主要用于避免某些对象属性被方法遍历到
 
 ```tsx
-const obj = {x: 1}
+const obj = { x: 1 }
 
 Object.defineProperty(obj, 'y', {
   value: 2,
@@ -21,6 +21,8 @@ for(let key in obj) {
 console.log(obj)        // { x: 1 }，打印无法打印不可枚举属性
 console.log(obj.y)      // 2，可以进行调用
 ```
+
+> 继承原型链上的属性都是 `不可枚举` 的
 
 
 
@@ -106,10 +108,10 @@ console.log(Array.from(obj))                  // [ 'y', 'x', undefined ]
 
 ### 对象方法
 
-**Object.create(target)**
+**Object.create (target)**
 
 - 功能：创建一个新对象，同时绑定目标对象原型链 `新对象.__proto___ === 目标对象`
-- 参数：
+- 参数及返回值：
   - `target: object`：目标对象
 - 返回值：`object`，新对象
 
@@ -127,7 +129,7 @@ newObj.fn()                               // fn is running
 
 -----
 
-**Object.defineProperty(target, key, config)**
+**Object.defineProperty (target, key, config)**
 
 - 功能：新增或修改目标对象的属性，可进行更多属性配置
 
@@ -159,7 +161,45 @@ Object.defineProperty(obj, 'y', {
 
 -----
 
-**Object.keys(target)**
+**Object.getOwnPropertyDescriptors (target)**
+
+- 功能：获取目标对象的所有自身属性的描述符配置
+- 参数：
+  - `target: object`：目标对象
+- 返回值：`object`：所有属性的描述符配置
+
+```tsx
+const obj = { x: 1 }
+Object.defineProperty(obj, 'y', {
+  value: 2,
+  enumerable: true
+})
+
+console.log(Object.getOwnPropertyDescriptors(obj))
+/*
+  {
+    x: { value: 1, writable: true, enumerable: true, configurable: true },
+    y: { value: 2, writable: false, enumerable: true, configurable: false }
+  }
+*/
+```
+
+> 如果想获取单个属性的描述配置可以使用 `Object.getOwnPropertyDescriptor()`，使用同理
+
+```tsx
+const obj = { x: 1 }
+Object.defineProperty(obj, 'y', {
+  value: 2,
+  enumerable: true
+})
+
+console.log(Object.getOwnPropertyDescriptor(obj, 'x'))
+// { value: 1, writable: true, enumerable: true, configurable: true }
+```
+
+------
+
+**Object.keys (target)**
 
 - 功能：遍历对象自身可枚举属性并返回
 
@@ -169,19 +209,42 @@ Object.defineProperty(obj, 'y', {
 - 返回值：`Array<string>`，存储 keys 的数组
 
 ```tsx
-const obj = {
-  x: 1,
-  y: 2,
-  z: 3
-}
+const obj = { x: 1 }
+Object.defineProperty(obj, 'y', {
+  value: 2,
+  enumerable: false 
+})
 Object.prototype.prop = 'prop'
 
-console.log(Object.key(obj))    // ['x', 'y', 'z']，不含继承链上属性
+console.log(Object.keys(obj))    // [ 'x' ]
 ```
 
 -----
 
-**Object.vaules(target)**
+**Object.getOwnPropertyNames (target)**
+
+- 功能：遍历对象自身属性并返回
+
+- 参数：
+  - `target: object`：传入目标对象
+
+- 返回值：`Array<string>`，存储 keys 的数组
+
+```tsx
+const obj = { x: 1 }
+
+Object.defineProperty(obj, 'y', {
+  value: 2,
+  enumerable: false 
+})
+Object.prototype.prop = 'prop'
+
+console.log(Object.getOwnPropertyNames(obj))    // [ 'x', 'y' ]
+```
+
+-----
+
+**Object.vaules (target)**
 
 - 功能：遍历对象自身可枚举属性的值并返回
 
@@ -191,19 +254,20 @@ console.log(Object.key(obj))    // ['x', 'y', 'z']，不含继承链上属性
 - 返回值：`Array<any>`：存储 values 的数组
 
 ```tsx
-const obj = {
-  x: 1,
-  y: [],
-  z: function() {}
-}
+const obj = { x: 1, y: 2 }
+
+Object.defineProperty(obj, 'z', {
+  value: 3,
+  enumerable: false 
+})
 Object.prototype.prop = 'prop'
 
-console.log(Object.values(obj))    // [ 1, [], [Function: z] ]，不含继承链上属性
+console.log(Object.values(obj))    // [ 1, 2 ]
 ```
 
 ------
 
-**Object.entries(target)**
+**Object.entries (target)**
 
 - 功能：遍历对象自身可枚举属性的 `key-value` 数组并返回
 
@@ -225,7 +289,7 @@ console.log(Object.entries(obj))    // [ [ 'x', 1 ], [ 'y', [] ], [ 'z', [Functi
 
 -------
 
-**Object.fromEntries(target)**
+**Object.fromEntries (target)**
 
 - 功能：是 `Object.entries(target)` 的逆操作，将一个 `key-value` 数组转换为对象
 - 参数：
@@ -244,7 +308,7 @@ console.log(Object.fromEntries(array))    // { x: undefined, y: 2, z: 3 }
 
 -----
 
-**Oject.is(valueA, valueB)**
+**Oject.is (valueA, valueB)**
 
 - 功能：和 `===` 功能一致，但是补足了 `NaN === NaN` 为 ture 和 `-0 === +0` 为 false 的缺陷
 - 参数：
@@ -261,7 +325,7 @@ console.log(Object.is(-0, +0))      // false
 
 -----
 
-**Object.assign(target, ...source)**
+**Object.assign (target, ...source)**
 
 - 功能：用于对象合并，将源对象的所有可枚举属性浅拷贝到目标对象，如果源对象有目标对象同名属性，则进行覆盖
 - 参数：
@@ -286,7 +350,114 @@ console.log(result)     // { x: 4, y: 2, z: 3 }
 console.log(target)     // { x: 1 }
 ```
 
+-----
 
+**Object.setPrototypeOf (target, prototype)**
+
+- 功能：将目标对象的原型设置为指定原型，ES6 推荐该方法替代 `target.__proto__ = prototype` 建立原型链
+- 参数：
+  - `target: object`：目标对象
+  - `prototype`：原型对象
+- 返回值：`object`：设置后的目标对象
+
+```tsx
+const target = {x: 1}
+const prototype = {y: 2}
+const result = Object.setPrototypeOf(target, prototype)
+console.log(result)                             // { x: 1 }
+console.log(target.__proto__ === prototype)     // true
+```
+
+-------
+
+**Object.getPrototypeOf (target)**
+
+- 功能：获取目标对象的原型，ES6 推荐该方法替代 `target.__proto__ ` 获取原型
+- 参数：
+  - `target: object`：目标对象
+- 返回值：`object`：原型对象
+
+```tsx
+const target = {x: 1}
+const prototype = {y: 2}
+Object.setPrototypeOf(target, prototype)
+console.log(Object.getPrototypeOf(target))    // { y: 2 }
+```
+
+------
+
+**Object.preventExtensions (target)**
+
+- 功能：将目标对象设置为不可扩展的，即无法为其添加属性
+- 参数：
+  - `target: object`：目标对象
+- 返回值：`object`：设置后的目标对象
+
+```tsx
+const obj = { x: 1 }
+const result = Object.preventExtensions(obj)
+obj.x = 3
+obj.y = 2
+
+console.log(result)   // { x: 3 }
+console.log(obj)      // { x: 3 }，可以修改属性值
+```
+
+------
+
+**Object.isExtensible (target)**
+
+- 功能：判断目标对象是否是可扩展的
+- 参数：
+  - `target: object`：目标对象
+- 返回值：`boolean`：判断结果
+
+```tsx
+const obj = {}
+const constrastObj = {}
+Object.preventExtensions(obj)
+
+console.log(Object.isExtensible(obj))             // false
+console.log(Object.isExtensible(constrastObj))    // true
+```
+
+-------
+
+**object.hasOwnProperty (key)**
+
+- 功能：判断一个对象实例的某个属性是否是自身存在而非原型链上继承
+- 参数：
+  - `key: string`：指定属性名
+- 返回值：`boolean`：判断结果
+
+```tsx
+const obj = { x: 1 }
+Object.prototype.y = 2
+
+console.log(obj.hasOwnProperty('x'))    // true
+console.log(obj.hasOwnProperty('y'))    // false
+```
+
+------
+
+**object.propertyIsEnumerable (key)**
+
+- 功能：判断一个对象实例的某个属性是否可枚举
+- 参数：
+  - `key: string`：指定属性名
+- 返回值：`boolean`：判断结果
+
+```tsx
+
+const obj = { x: 1 }
+Object.defineProperty(obj, 'y', {
+  value: 2,
+  enumerable: false     
+})
+
+console.log(obj.propertyIsEnumerable('x'))    // true
+console.log(obj.propertyIsEnumerable('y'))    // false
+```
 
 
 
@@ -367,4 +538,6 @@ for(let key in obj) {
   }
 }
 ```
+
+
 
