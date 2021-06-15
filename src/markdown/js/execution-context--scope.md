@@ -347,20 +347,22 @@ console.log(obj.user)    // jack
 var name = 'global'
 const A = {
   name: 'A',
-  B: {
-    x: 'B',
-    C: function() {
-      const D = {
-        x: 'D',
-        showThis: () => {
-          console.log(this.name)
+  A_fn: function() {
+    return {
+      name: 'B',
+      B_fn: function() {
+        return {
+          name: 'C',
+          C_fn: () => {
+            console.log(this.name)
+          }
         }
       }
-      D.showThis()
     }
   }
 }
-A.B.C() 	// 箭头函数this往上找，this从fn()传来，由B调用的C，因此this指向B，所以this.name等同于B.name值为'B'
+
+A.A_fn().B_fn().C_fn()      // 箭头函数this值与最近父级普通函数的this值相同，即与B_fn的this相同，B_fn的this指向A_fn的返回对象，所以name为B
 ```
 
 > 在 node 环境中，如果箭头函数没有 this 来源则指向一个空对象，而在浏览器环境中则指向 window，所以下面代码如果在 node 环境下调试结果会为 undefined
@@ -369,20 +371,23 @@ A.B.C() 	// 箭头函数this往上找，this从fn()传来，由B调用的C，因
 var name = 'global'
 const A = {
   name: 'A',
-  B: {
-    x: 'B',
-    C: () => {
-      const D = {
-        x: 'D',
-        showThis: () => {
-          console.log(this.name)
+  A_fn: () => {
+    return {
+      name: 'B',
+      B_fn: () => {
+        return {
+          name: 'C',
+          C_fn: () => {
+            console.log(this.name)
+          }
         }
       }
-      D.showThis()
     }
   }
 }
-A.B.C() 	// 箭头函数this往上找，找不到函数传来的this，因此this.name等同于wiondow.name值为'global'
+
+// // 箭头函数找不到父级普通函数的this，因此this.name等同于wiondow.name值为'global'
+A.A_fn().B_fn().C_fn()
 ```
 
 

@@ -64,6 +64,16 @@ const sidebarConfig:navConfigType = [
         title: '对象',
         path: '/js/data-featurs/object'
       },
+      {
+        id: '函数',
+        title: '函数',
+        path: '/js/data-featurs/function'
+      },
+      {
+        id: '数组',
+        title: '数组',
+        path: '/js/data-featurs/array'
+      },
     ]
   },
 ]

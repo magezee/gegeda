@@ -539,5 +539,42 @@ for(let key in obj) {
 }
 ```
 
+**监听取值**
 
+除了使用 `Object.defineProperty()` 方法设置属性的监听函数外，也可以直接便捷使用 `get、set` 关键字监听属性
+
+```tsx
+const obj = {
+  get getX() {
+    console.log('读取x值')
+    return this.x
+  },
+  set setX(value) {
+    console.log('写入x值')
+    this.x = value 
+  }
+}
+
+obj.setX = 1        // 写入x值
+obj.getX            // 读取x值
+console.log(obj)    // { getX: [Getter], setX: [Setter], x: 1 }
+```
+
+> 需要注意的是 get 和 set 方法的名字不能和设置的属性名字相同，否则会造成栈溢出
+
+```tsx
+const obj = {
+  get x() {
+    console.log('读取x值')
+    return this.x
+  },
+  set x(value) {
+    console.log('写入x值')
+    this.x = value 
+  }
+}
+
+obj.x = 1        // 栈溢出
+obj.x            // 栈溢出
+```
 
