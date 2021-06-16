@@ -571,3 +571,20 @@ function fn (x = 1, y) {
 fn(2)
 ```
 
+-----
+
+#### 参数储存结果
+
+看似结果储存在回调函数的参数，实际上只是将数据处理完毕后通过形参的方式传给回调函数，回调函数拿到数据而已
+
+```tsx
+function fn(callback) {
+  const data = 'data'
+	callback(data)                // 传进回调函数
+}
+
+fn((callbackResult) => { 
+  console.log(callbackResult)    // data
+})	
+```
+

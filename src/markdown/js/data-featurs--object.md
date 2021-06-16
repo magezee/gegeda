@@ -30,7 +30,7 @@ console.log(obj.y)      // 2，可以进行调用
 
 ### 类型
 
-**纯对象**
+#### 纯对象
 
 传统的 JS 对象都是不纯粹的，直接声明一个对象会进行原型链的继承
 
@@ -59,7 +59,9 @@ console.log(obj == '[object Object]')       // ture，借助于原型链上的va
 console.log(pureObj == '[object Object]')   // 报错，无法将对象转换为值类型
 ```
 
-**类数组对象**
+-----
+
+#### 类数组对象
 
 一个对象中拥有0,1,2……等递增数字属性且含有 length 用于统计数字属性的个数，但是不是数组而是对象
 
@@ -107,6 +109,8 @@ console.log(Array.from(obj))                  // [ 'y', 'x', undefined ]
 ----
 
 ### 对象方法
+
+#### 创建与设置
 
 **Object.create (target)**
 
@@ -197,7 +201,44 @@ console.log(Object.getOwnPropertyDescriptor(obj, 'x'))
 // { value: 1, writable: true, enumerable: true, configurable: true }
 ```
 
+**Object.preventExtensions (target)**
+
+- 功能：将目标对象设置为不可扩展的，即无法为其添加属性
+- 参数：
+  - `target: object`：目标对象
+- 返回值：`object`：设置后的目标对象
+
+```tsx
+const obj = { x: 1 }
+const result = Object.preventExtensions(obj)
+obj.x = 3
+obj.y = 2
+
+console.log(result)   // { x: 3 }
+console.log(obj)      // { x: 3 }，可以修改属性值
+```
+
 ------
+
+**Object.isExtensible (target)**
+
+- 功能：判断目标对象是否是可扩展的
+- 参数：
+  - `target: object`：目标对象
+- 返回值：`boolean`：判断结果
+
+```tsx
+const obj = {}
+const constrastObj = {}
+Object.preventExtensions(obj)
+
+console.log(Object.isExtensible(obj))             // false
+console.log(Object.isExtensible(constrastObj))    // true
+```
+
+------
+
+#### 属性与值
 
 **Object.keys (target)**
 
@@ -308,6 +349,26 @@ console.log(Object.fromEntries(array))    // { x: undefined, y: 2, z: 3 }
 
 -----
 
+**object.propertyIsEnumerable (key)**
+
+- 功能：判断一个对象实例的某个属性是否可枚举
+- 参数：
+  - `key: string`：指定属性名
+- 返回值：`boolean`：判断结果
+
+```tsx
+const obj = { x: 1 }
+Object.defineProperty(obj, 'y', {
+  value: 2,
+  enumerable: false     
+})
+
+console.log(obj.propertyIsEnumerable('x'))    // true
+console.log(obj.propertyIsEnumerable('y'))    // false
+```
+
+-----
+
 **Oject.is (valueA, valueB)**
 
 - 功能：和 `===` 功能一致，但是补足了 `NaN === NaN` 为 ture 和 `-0 === +0` 为 false 的缺陷
@@ -352,6 +413,8 @@ console.log(target)     // { x: 1 }
 
 -----
 
+#### 对象原型链
+
 **Object.setPrototypeOf (target, prototype)**
 
 - 功能：将目标对象的原型设置为指定原型，ES6 推荐该方法替代 `target.__proto__ = prototype` 建立原型链
@@ -386,43 +449,6 @@ console.log(Object.getPrototypeOf(target))    // { y: 2 }
 
 ------
 
-**Object.preventExtensions (target)**
-
-- 功能：将目标对象设置为不可扩展的，即无法为其添加属性
-- 参数：
-  - `target: object`：目标对象
-- 返回值：`object`：设置后的目标对象
-
-```tsx
-const obj = { x: 1 }
-const result = Object.preventExtensions(obj)
-obj.x = 3
-obj.y = 2
-
-console.log(result)   // { x: 3 }
-console.log(obj)      // { x: 3 }，可以修改属性值
-```
-
-------
-
-**Object.isExtensible (target)**
-
-- 功能：判断目标对象是否是可扩展的
-- 参数：
-  - `target: object`：目标对象
-- 返回值：`boolean`：判断结果
-
-```tsx
-const obj = {}
-const constrastObj = {}
-Object.preventExtensions(obj)
-
-console.log(Object.isExtensible(obj))             // false
-console.log(Object.isExtensible(constrastObj))    // true
-```
-
--------
-
 **object.hasOwnProperty (key)**
 
 - 功能：判断一个对象实例的某个属性是否是自身存在而非原型链上继承
@@ -438,34 +464,13 @@ console.log(obj.hasOwnProperty('x'))    // true
 console.log(obj.hasOwnProperty('y'))    // false
 ```
 
-------
-
-**object.propertyIsEnumerable (key)**
-
-- 功能：判断一个对象实例的某个属性是否可枚举
-- 参数：
-  - `key: string`：指定属性名
-- 返回值：`boolean`：判断结果
-
-```tsx
-
-const obj = { x: 1 }
-Object.defineProperty(obj, 'y', {
-  value: 2,
-  enumerable: false     
-})
-
-console.log(obj.propertyIsEnumerable('x'))    // true
-console.log(obj.propertyIsEnumerable('y'))    // false
-```
-
 
 
 -----
 
 ### 使用技巧
 
-**对象属性简写**
+#### 对象属性简写
 
 当不声明属性直接传入一个变量时，会用自动用变量名为属性，变量值为属性值
 
@@ -480,7 +485,9 @@ const obj = {
 }
 ```
 
-**动态属性**
+-----
+
+#### 动态属性
 
 当对象调用属性的值为变量时，不能使用 `obj.xxx` 的方式，而是应该使用 `obj[xxx]`，且该变量的值要为 string 类型，如果传入的不是该类型，会进行隐式转换
 
@@ -509,7 +516,9 @@ function fn(key, value) {
 fn('x', 'x')   // {x: 'x'}
 ```
 
-**遍历对象**
+-----
+
+#### 遍历对象
 
 可以使用 `for in` 函数遍历对象的可枚举属性，但是这个方法存在一个隐患，即会遍历到原型链上原型的属性
 
@@ -539,7 +548,7 @@ for(let key in obj) {
 }
 ```
 
-**监听取值**
+#### 监听取值
 
 除了使用 `Object.defineProperty()` 方法设置属性的监听函数外，也可以直接便捷使用 `get、set` 关键字监听属性
 
