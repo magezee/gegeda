@@ -1,6 +1,6 @@
 ## 提升
 
-JS代码中，存在变量提升和函数提升
+JS代码中，由于 [内部机制](/js/execution-context/context#heading-2) 存在变量提升和函数提升
 
 ### 变量提升
 

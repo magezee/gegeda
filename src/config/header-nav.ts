@@ -1,0 +1,56 @@
+// > 此文件用于配置网站头部导航栏设置,path只负责跳转路由，还需要在 src/config/routers 中再对应配置路由及渲染组件
+
+import { navConfigType } from 'src/constant/types'
+
+const navConfig:navConfigType = [
+  {
+    id: 'docs',
+    title: '前端资料',
+    children: [
+      {
+        id: 'js',
+        title: 'JS',
+        path: '/js'
+      },
+      {
+        id: 'css',
+        title: 'CSS',
+        path: '/css'
+      },
+      {
+        id: 'html',
+        title: 'HTML',
+        path: '/html'
+      },
+      {
+        id: 'node',
+        title: 'Node',
+        path: '/node'
+      },
+      {
+        id: '浏览器',
+        title: '浏览器',
+        path: '/browser'
+      },
+      {
+        id: 'react',
+        title: 'React',
+        path: '/react'
+      },
+    ]
+  },
+  {
+    id: 'share',
+    title: '其他分享',
+    children: [
+      {
+        id: '实用工具',
+        title: '实用工具',
+        path: '/share'
+      },
+    ]
+  }
+]
+
+
+export default navConfig

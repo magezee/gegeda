@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-do
 
 import Loading from 'src/components/loading'
 import Header from 'src/components/header'
-import routers from './routers'
+import routers from 'src/config/routers'
 
 import './app.scss'
 

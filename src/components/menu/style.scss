@@ -40,7 +40,13 @@ $menu-item-disabled-color: $gray-600;
 
       a {
         color: $menu-item-active-color;
+        
       }
+    }
+
+    a {
+      display: block;
+      width: 100%;
     }
   }
 
@@ -73,6 +79,11 @@ $menu-item-disabled-color: $gray-600;
             color: $menu-item-active-color;
           }
         }
+
+        a {
+          display: block;
+          width: 100%;
+        }
       }
     }
   }
@@ -103,7 +114,8 @@ $menu-item-disabled-color: $gray-600;
       background: $white;
       z-index: 100;
       top: 0;
-      left: 0;
+      left: 50%;
+      transform: translateX(-50%);
       border: $menu-border-width solid $menu-border-color;
       box-shadow: $submenu-box-shadow;
       &.menu-opened {
