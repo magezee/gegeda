@@ -2,7 +2,7 @@
 
 ### 简述
 
-**说明**：从0开始配置一套 react + typescript 的 webpack 配置（本次使用webpack5版本）
+**说明**：从0开始配置一套 react + typescript 的 webpack 配置（本次使用webpack5版本）！
 
 **参考**：[配置webpack（上）](https://juejin.cn/post/6860129883398668296)、[配置webpack（下）](https://juejin.cn/post/6860134655568871437)
 
