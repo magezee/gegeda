@@ -1,0 +1,29 @@
+
+.content {
+  display: flex;
+  
+  .sidebar {
+    position: fixed;
+    left: 0;
+    flex-basis: 180px;
+    flex-shrink: 0;
+    border-right: 2px solid #ddd;
+    width: 180px;
+    overflow: auto;
+    height: calc(100vh - 50px);
+
+    .sidebar-title {
+      margin: 5px 20px;
+      font-weight: 600;
+      color: #2c3e50;
+      font-size: 1.1em;
+    }
+  }
+
+  .render-md {
+    padding-left: 180px;
+    width: calc(100vw - 200px);
+  }
+
+
+}

@@ -18,7 +18,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./", 
+    "paths": {								                // 路径映射，与 baseUrl 关联
+      "src/*": ["src/*"],
+      "components/*": ["src/components/*"],
+      "utils/*": ["src/utils/*"],
+      "markdown": ["src/markdown/*"],
+      "constant": ["src/constant/*"], 
+    },
   },
   "include": [
     "src"
