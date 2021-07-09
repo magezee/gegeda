@@ -58,6 +58,17 @@ const jack = new _Person()
 console.log(jack)     // Person { name: 'Person' }，this仍是指向jack，在内部创建了name属性
 ```
 
+> 一般充当构造函数的函数不进行直接调用，否则会产生意料情况
+
+```tsx
+function Person() {
+  this.name = 'Person'
+}
+
+Person()
+console.log(name)		// Person，直接执行Person()则this指向顶层对象，等同于在全局作用域中生成了一个变量name
+```
+
 **内部实现**
 
 ```tsx

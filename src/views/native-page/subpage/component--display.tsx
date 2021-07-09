@@ -3,11 +3,11 @@ import RenderMd from 'src/components/render-md'
 import mdData from 'markdown/native/component--display.md'
 
 
-const Display:React.FC = () => {
+const Display__:React.FC = () => {
   return (
     <RenderMd mdData={mdData}/>
   )
 }
 
 
-export default Display
+export default Display__

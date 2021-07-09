@@ -3,11 +3,11 @@ import RenderMd from 'src/components/render-md'
 import mdData from 'markdown/js/data-featurs--array.md'
 
 
-const Array_:React.FC = () => {
+const Array__:React.FC = () => {
   return (
     <RenderMd mdData={mdData}/>
   )
 }
 
 
-export default Array_
+export default Array__

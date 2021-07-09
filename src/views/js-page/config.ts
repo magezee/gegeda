@@ -79,6 +79,11 @@ const sidebarConfig:navConfigType = [
         title: '字符串',
         path: '/js/data-featurs/string'
       },
+      {
+        id: '正则表达式',
+        title: '正则表达式',
+        path: '/js/data-featurs/regexp'
+      },
     ]
   },
 ]

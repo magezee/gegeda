@@ -3,11 +3,11 @@ import RenderMd from 'src/components/render-md'
 import mdData from 'markdown/js/data-featurs--function.md'
 
 
-const Function_:React.FC = () => {
+const Function__:React.FC = () => {
   return (
     <RenderMd mdData={mdData}/>
   )
 }
 
 
-export default Function_
+export default Function__
