@@ -18,7 +18,7 @@ interface renderDataPageProps {
  */
 const RenderDataPage: React.FC<renderDataPageProps> = ({sidebarConfig, subRouters, sidebarTitle}) => {
   return (
-    <div className="content">
+    <div className="md-content">
       <div className="sidebar">
         <div className="sidebar-title">{sidebarTitle}</div>
         <Navigation navigationConfig={sidebarConfig}/>

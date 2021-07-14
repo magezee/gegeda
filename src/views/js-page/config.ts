@@ -55,34 +55,85 @@ const sidebarConfig:navConfigType = [
         path: '/js/data-featurs/constructor'
       },
       {
-        id: '类',
-        title: '类',
+        id: 'Class',
+        title: 'Class',
         path: '/js/data-featurs/class'
       },
       {
-        id: '对象',
-        title: '对象',
+        id: 'Object',
+        title: 'Object',
         path: '/js/data-featurs/object'
       },
       {
-        id: '函数',
-        title: '函数',
+        id: 'Function',
+        title: 'Function',
         path: '/js/data-featurs/function'
       },
       {
-        id: '数组',
-        title: '数组',
+        id: 'Array',
+        title: 'Array',
         path: '/js/data-featurs/array'
       },
       {
-        id: '字符串',
-        title: '字符串',
+        id: 'String',
+        title: 'String',
         path: '/js/data-featurs/string'
       },
       {
-        id: '正则表达式',
-        title: '正则表达式',
+        id: 'RegExp',
+        title: 'RegExp',
         path: '/js/data-featurs/regexp'
+      },
+      {
+        id: 'Number',
+        title: 'Number',
+        path: '/js/data-featurs/number'
+      },
+      {
+        id: 'Math',
+        title: 'Math',
+        path: '/js/data-featurs/math'
+      },
+      {
+        id: 'Symbol',
+        title: 'Symbol',
+        path: '/js/data-featurs/symbol'
+      },
+      {
+        id: 'Map',
+        title: 'Map',
+        path: '/js/data-featurs/map'
+      },
+      {
+        id: 'Set',
+        title: 'Set',
+        path: '/js/data-featurs/set'
+      },
+      {
+        id: 'Promise',
+        title: 'Promise',
+        path: '/js/data-featurs/promise'
+      },
+    ]
+  },
+  {
+    id: '代码技巧',
+    title: '代码技巧',
+    children: [
+      {
+        id: '关键字',
+        title: '关键字',
+        path: '/js/code-technique/keyword'
+      },
+      {
+        id: '解构',
+        title: '解构',
+        path: '/js/code-technique/deconstruction'
+      },
+      {
+        id: '闭包',
+        title: '闭包',
+        path: '/js/code-technique/closure'
       },
     ]
   },

@@ -17,24 +17,21 @@ $header-height: 50px;
   .main {
     margin-top: $header-height;
     background-color: $white;
+    min-height: 90vh;
+  }
+
+  .footer {
+    position: relative;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+
+    background-color: #f6f9fa;
+    height: 50px;
+    max-height: 50px;    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-  border-radius: 8px;
-  background-color: #F5F5F5;
-}
-::-webkit-scrollbar-thumb {
-  border-radius: 8px;
-  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-  border-radius: 8px;
-  background-color: rgb(180, 180, 180);
-  transition: 0.3s ease-in-out;
-}
-::-webkit-scrollbar-track {
-  border-radius: 8px;
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  background-color: #F5F5F5;
-}

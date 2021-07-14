@@ -10,7 +10,7 @@ const navConfig:navConfigType = [
       {
         id: 'js',
         title: 'JS',
-        path: '/js'
+        path: '/js/execution-context/context'
       },
       {
         id: 'css',
@@ -35,7 +35,7 @@ const navConfig:navConfigType = [
       {
         id: 'react',
         title: 'React',
-        path: '/react'
+        path: '/react/core-concept/jsx'
       },
       {
         id: 'native',
@@ -51,7 +51,7 @@ const navConfig:navConfigType = [
       {
         id: '实用工具',
         title: '实用工具',
-        path: '/share'
+        path: '/share/websites/code'
       },
     ]
   }
