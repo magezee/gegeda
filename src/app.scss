@@ -26,10 +26,11 @@ $header-height: 50px;
     left: 0;
     bottom: 0;
     z-index: 999;
-
-    background-color: #f6f9fa;
+    border-top: solid 1px #ddd;
+    background-color: white;
     height: 50px;
-    max-height: 50px;    display: flex;
+    max-height: 50px;    
+    display: flex;
     justify-content: center;
     align-items: center;
   }

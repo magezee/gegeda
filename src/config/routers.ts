@@ -19,6 +19,12 @@ const routers: routerConfigType = [
     compoment: React.lazy(() => import('../views/js-page'))
   },
   {
+    id: 'css',
+    exact: false,
+    path: '/css',
+    compoment: React.lazy(() => import('../views/css-page'))
+  },
+  {
     id: 'react',
     exact: false,
     path: '/react',
@@ -29,6 +35,12 @@ const routers: routerConfigType = [
     exact: false,
     path: '/native',
     compoment: React.lazy(() => import('../views/native-page'))
+  },
+  {
+    id: 'vue',
+    exact: false,
+    path: '/vue',
+    compoment: React.lazy(() => import('../views/vue-page'))
   },
 
 

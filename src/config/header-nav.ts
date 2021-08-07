@@ -15,7 +15,7 @@ const navConfig:navConfigType = [
       {
         id: 'css',
         title: 'CSS',
-        path: '/css'
+        path: '/css/basic/add-style'
       },
       {
         id: 'html',
@@ -41,6 +41,11 @@ const navConfig:navConfigType = [
         id: 'native',
         title: 'Native',
         path: '/native'
+      },
+      {
+        id: 'vue',
+        title: 'Vue',
+        path: '/vue/core-concept/vue-template'
       },
     ]
   },

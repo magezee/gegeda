@@ -302,6 +302,27 @@ const obj = {
 obj.fn()
 ```
 
+> 在一些回调函数（如 `setTimeout` 的回调函数）中，如果不使用箭头函数的形式，可能会丢失 this，因此回调函数尽量使用箭头函数
+
+```tsx
+const obj = {
+  x: 'x',
+  fnA() {
+    setTimeout(function() {
+      console.log(this.x)
+    })
+  },
+  fnB() {
+    setTimeout(() => {
+      console.log(this.x)
+    })
+  }
+}
+
+obj.fnA()     // undefined
+obj.fnB()     // x
+```
+
 **构造函数**
 
 > 使用 new 声明构造函数实例时，如果构造函数中 return 了引用类型，则直接返回，否则自动生成新的实例对象

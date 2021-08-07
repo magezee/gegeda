@@ -7,7 +7,7 @@ const Footer: FC = () => {
     <div className="information">
       <a href="https://beian.miit.gov.cn">
         <img alt="icon" src={Icon}/>
-        <span>桂ICP备 2021005699号</span>
+        <span>桂ICP备2021005699号-1</span>
       </a>
     </div>
   )
