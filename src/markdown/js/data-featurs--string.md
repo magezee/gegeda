@@ -282,6 +282,7 @@ const str = 'gegeda'
 
 console.log(str.includes('ge'))          // true
 console.log(str.includes('ge', 4))       // false
+console.log(str.includes(''))            // true，空字符是任意字符串的子字符
 
 console.log(str.slice(4))                // da
 ```

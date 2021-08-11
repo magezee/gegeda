@@ -8,9 +8,19 @@ const sidebarConfig:navConfigType = [
     title: '核心概念',
     children: [
       {
-        id: 'vue模板',
-        title: 'vue模板',
-        path: '/vue/core-concept/vue-template'
+        id: 'vue应用',
+        title: 'vue应用',
+        path: '/vue/core-concept/vue-app'
+      },
+      {
+        id: '生命周期',
+        title: '生命周期',
+        path: '/vue/core-concept/lifecycle'
+      },
+      {
+        id: '更新机制',
+        title: '更新机制',
+        path: '/vue/core-concept/update'
       },
     ]
   },
@@ -19,9 +29,19 @@ const sidebarConfig:navConfigType = [
     title: '内置方法',
     children: [
       {
-        id: 'vue指令',
-        title: 'vue指令',
-        path: '/vue/api/vue-instruction'
+        id: '全局方法',
+        title: '全局方法',
+        path: '/vue/api/global-method'
+      },
+      {
+        id: '实例方法',
+        title: '实例方法',
+        path: '/vue/api/instance-method'
+      },
+      {
+        id: '指令',
+        title: '指令',
+        path: '/vue/api/instruction'
       },
     ]
   }

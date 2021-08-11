@@ -45,7 +45,7 @@ const navConfig:navConfigType = [
       {
         id: 'vue',
         title: 'Vue',
-        path: '/vue/core-concept/vue-template'
+        path: '/vue/core-concept/vue-app'
       },
     ]
   },
