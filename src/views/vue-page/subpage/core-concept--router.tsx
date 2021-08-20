@@ -1,12 +1,13 @@
 import React from 'react'
 import RenderMd from 'src/components/render-md'
-import mdData from 'markdown/vue/core-concept--update.md'
+import mdData from 'markdown/vue/core-concept--router.md'
 
-const VueTemplate__:React.FC = () => {
+
+const Router__:React.FC = () => {
   return (
     <RenderMd mdData={mdData}/>
   )
 }
 
 
-export default VueTemplate__
+export default Router__

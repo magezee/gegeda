@@ -65,6 +65,7 @@ export default {
     }
   }
 }
+</script>
 ```
 
 ![](https://raw.githubusercontent.com/magezee/images/main/arr.gif)

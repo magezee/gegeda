@@ -22,6 +22,21 @@ const sidebarConfig:navConfigType = [
         title: '更新机制',
         path: '/vue/core-concept/update'
       },
+      {
+        id: '插件',
+        title: '插件',
+        path: '/vue/core-concept/plugin'
+      },
+      {
+        id: '数据通信',
+        title: '数据通信',
+        path: '/vue/core-concept/data-traffic'
+      },
+      {
+        id: '路由',
+        title: '路由',
+        path: '/vue/core-concept/router'
+      },
     ]
   },
   {
@@ -42,6 +57,17 @@ const sidebarConfig:navConfigType = [
         id: '指令',
         title: '指令',
         path: '/vue/api/instruction'
+      },
+    ]
+  },
+  {
+    id: '代码技巧',
+    title: '代码技巧',
+    children: [
+      {
+        id: '类组件',
+        title: '类组件',
+        path: '/vue/technique/class-component'
       },
     ]
   }

@@ -1,8 +1,10 @@
 ## Vue应用
 
-### 创建应用
+### 应用实例
 
-如果直接写在一个 html 文件中，生成一个 vue 的应用，只需要直接引入 vue 并且声明一个实例，插入到指定的标签中即可
+**CDN 引用**
+
+直接通过 cdn 引入 vue 的代码文件，使用 vue 声明一个应用实例并插入到指定的标签中即可
 
 ```html
 <!DOCTYPE html>
@@ -26,52 +28,18 @@
 </html>
 ```
 
-但是在单页面应用开发中并不会写多个 html 文件，而是写一个 html 模板和一个 vue 实例，将多个 `.vue` 组件插入到模板实例中
+**脚手架安装**
 
-```html
-<!--index.html -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
-</html>
+安装：
+
+```markdown
+npm install -g @vue/cli
 ```
 
-```js
-// main.js
-import Vue from 'vue'
-import App from './App'
+可以使用 ui 界面便捷创建项目
 
-new Vue({
-  el: '#app',
-  components: { App },
-  template: '<App/>'
-})
-```
-
-```html
-<!-- App.vue -->
-<template>
-  <div>
-    <p>{{ time }}</p>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'App',
-  data () {
-    return {
-      time: new Date()
-    }
-  }
-}
-</script>
+```markdown
+vue ui
 ```
 
 **实例内容**
@@ -89,21 +57,19 @@ export default {
 </script>
 ```
 
-![](https://img-blog.csdnimg.cn/3a6b7adb7b2f4b54917b646b1d469314.png)
-
-
-
 > 带 `$` 标志的属性是 vue 提供快捷获取特定实例数据的接口
 >
 > 带 `_` 标志的属性是 vue 实例的自身私有属性
+
+![](https://img-blog.csdnimg.cn/3a6b7adb7b2f4b54917b646b1d469314.png)
 
 
 
 -----
 
-### 创建组件
+### 组件实例
 
-#### 应用与组件关系
+**创建**
 
 一个应用实例通过 `new Vue()` 来创建，简称 `vm`，而一个组件实例通过 `new VueComponent` 来创建
 
@@ -113,27 +79,63 @@ export default {
 >
 > 原型链关系：`VueComponent.prototype.__proto__` == `Vue.prototype`，所以 vc 可以访问 Vue 原型上的属性和方法，如 `$data` 
 
-一般使用 `Vue.extend()` 来生成一个组件构造函数，当将构造函数注册并且在 html 中使用组件时，才会调用该构造函数生成组件实例
+一般使用 `Vue.extend()` 来生成一个组件构造函数，然后在父容器中的 `components` 属性注册该构造函数才可以在该容器中使用，然后生成对应的组件实例
 
+```html
+<body>
+  <div id="app">
+    <Demo />        <!-- 使用组件 -->
+  </div>
+  
+  <script>
+    // 定义组件的构造函数
+  	const Demo = Vue.extend({
+      template: `
+        <div>
+          {{ info }}
+        </div>
+      `,
+      data() {
+        return {
+          info: '组件数据'
+        }
+      }
+    })
+    
+    new Vue({
+      el: '#app',
+      components: {
+        Demo        // 注册组件，使用组件时的具体组件名以这里为准
+      }
+    })
+  </script>
+</body>
+```
 
+> 可以不写 `Vue.extend`，直接声明一个对象然后在注册时 vue 会自动识别
 
+```tsx
+const Demo = {
+  template: `
+    <div>
+      {{ info }}
+    </div>
+  `,
+  data() {
+    return {
+      info: '组件数据'
+    }
+  }
+}
+```
 
+**vue文件**
 
-#### 非单组件文件
+`.vue` 文件代表的是一个单组件，因此不可写复数组件，且也不可使用 `new Vue()` 来声明应用
 
+文件一般由三种标签构成，规定代码书写顺序一定是遵从 template → script → style
 
-
-
-
-
-
-#### 单组件文件
-
-在一个 `.vue` 文件中，一般由三种标签构成，规定代码书写顺序一定是遵从 template → script → style
-
-> `.vue` 文件代表的是一个单组件，因此不可写复数组件，且也不可使用 `new Vue()` 来声明应用
-
-**template**
+template：
 
 用于编写 html 代码，template 中的 hmtl 可以直接使用 `{{ }}` 的表达式来编写 js 代码，在该表达式中可以直接读取到当前 vue 实例及原型链上的任意属性，一旦实例 `_data` 属性的数据发生改变，页面会立即更新
 
@@ -169,7 +171,7 @@ export default {
 </script>
 ```
 
-**script**
+script：
 
 用于编写 js 代码，创建 vue 实例或者编写 vue 组件，可以通过内置配置选项来控制组件的状态，在实例代码中声明的函数一般都不写成箭头函数形式，因为一般 this 都指向实例，使用箭头函数会指向顶层对象
 
@@ -193,7 +195,7 @@ export default {
 </script>
 ```
 
-**style**
+style：
 
 用于编写 css 代码，如果需要动态变化样式可以配合 `v-bind`
 
@@ -241,6 +243,8 @@ export default {
 ------
 
 ### 选项
+
+通过选项来配置实例的功能
 
 #### el
 
@@ -348,6 +352,15 @@ export default {
 
 > 注意：在代码中使用组件的名字根据注册时的名字决定，这里只是决定了 `vue-devtools` 上如何显示
 
+```html
+<script>
+  export default {
+    // other...
+    name: 'Demo'
+  }
+</script>
+```
+
 
 
 -----
@@ -357,6 +370,76 @@ export default {
 类型：`Object`
 
 功能：将指定组件注册为该实例的子组件
+
+```html
+<template>
+  <Child />		
+</template>
+
+<script>
+  import Child from '.../Child'
+  export default {
+    // other...
+    components: {
+      Child
+    }
+  }
+</script>
+```
+
+
+
+-----
+
+#### props
+
+类型：`Array<string> | Object `
+
+功能：用于接收父组件传递过来的数据，传入的数据会直接写进子组件实例的属性内
+
+数组类型：便捷，但是无法限制传入的数据类型
+
+```html
+<!-- Father -->
+<template>
+  <Child :info="xxx" :fn="xxx" />		<!-- 直接写属性传只能string类型，因此一般配合v-bind使用 -->
+</template>
+
+<!-- Child -->
+<script>
+  export default {
+    // other...
+    props: ['info', 'fn']
+  }
+</script>
+```
+
+对象类型：可以对传入的数据进行更多配置
+
+```tsx
+props: {
+  info: String,
+  fn: Function
+}
+```
+
+> 可以继续写成对象形式添加更多配置项：
+>
+> - type：类型
+>
+> - default：默认值
+>
+> - require：该属性是否必须
+
+```tsx
+props: {
+  info: {
+    type: String,
+    default: '',
+    require: true
+  }
+}
+```
 
 
 
@@ -377,7 +460,7 @@ export default {
 
 <script>
 export default {
-  name: 'Demo',
+  // other...
   methods: {
     handleClick (event) {
       console.log(event.target.textContent)     // 按钮
@@ -415,7 +498,7 @@ export default {
 
 <script>
 export default {
-  name: 'Demo',
+  // other...
   data () {
     return {
       x: 1,
@@ -464,7 +547,7 @@ export default {
 
 <script>
 export default {
-  name: 'Demo',
+  // other...
   data () {
     return {
       count: 0
@@ -552,7 +635,7 @@ watch: {
 
 <script>
 export default {
-  name: 'Demo',
+  // other...
   data() {
     return {
       count: 0
@@ -574,8 +657,6 @@ export default {
 ```
 
 ![](https://raw.githubusercontent.com/magezee/images/main/directives.gif)
-
-https://raw.githubusercontent.com/magezee/images/main/binging.png?token=AN45VTDIT5ESYM5JZ6TLFULBCNYEA
 
 **对象式**
 
@@ -626,3 +707,56 @@ export default {
 ```
 
 ![](https://raw.githubusercontent.com/magezee/images/main/square.gif)
+
+
+
+------
+
+#### mixins
+
+类型：`Array<Object>`
+
+功能：可以便捷为多个组件添加相同的选项配置
+
+> 当 mixins 和组件内部有相同的选项时
+>
+> - 生命周期钩子选项：mixins 和组件自身定义的功能叠加
+> - 其他选项：按组件自身定义的功能
+
+```tsx
+// mixins.js
+export default {
+  mounted() {
+    console.log('mixins')
+  }
+}
+
+// ComponentA.vue
+// > 打印 mixins ComponentA
+import mixin from './mixins'
+export default {
+  name: 'ComponentA',
+  mixins: [mixin],
+  mounted() {
+    console.log('ComponentA')
+  }
+}
+
+// Component.vue
+// > 打印 mixins ComponentB
+import mixin from './mixins'
+export default {
+  name: 'ComponentB',
+  mounted () {
+    console.log('ComponentB')
+  },
+  mixins: [mixin]
+}
+```
+
+
+
+
+
+
+

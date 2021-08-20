@@ -6,7 +6,7 @@ import { sidebarConfig, subRouters } from './config'
 
 const VuePage: React.FC = () => {
   return (
-    <RenderDataPage sidebarConfig={sidebarConfig}  subRouters={subRouters} sidebarTitle='React文档'/>
+    <RenderDataPage sidebarConfig={sidebarConfig}  subRouters={subRouters} sidebarTitle='Vue文档'/>
   )
 }
 

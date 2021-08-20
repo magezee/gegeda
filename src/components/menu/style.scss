@@ -108,6 +108,7 @@ $menu-item-disabled-color: $gray-600;
     }
 
     .submenu {
+      display: none;
       opacity: 0;
       transition: all .25s ease-in-out;
       position: absolute;
@@ -119,8 +120,8 @@ $menu-item-disabled-color: $gray-600;
       border: $menu-border-width solid $menu-border-color;
       box-shadow: $submenu-box-shadow;
       &.menu-opened {
-        opacity: 1;
-        top:calc(100% + 5px);
+        display: block;
+        animation: menuOpen .3s forwards;
       }
     }
   }
@@ -157,3 +158,12 @@ $menu-item-disabled-color: $gray-600;
   }
 }
 
+@keyframes menuOpen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 30px);
+  }
+}
