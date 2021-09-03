@@ -40,7 +40,6 @@ $menu-item-disabled-color: $gray-600;
 
       a {
         color: $menu-item-active-color;
-        
       }
     }
 
@@ -122,6 +121,12 @@ $menu-item-disabled-color: $gray-600;
       &.menu-opened {
         display: block;
         animation: menuOpen .3s forwards;
+      }
+    }
+
+    .menu-item {
+      a {
+        text-align: center;
       }
     }
   }

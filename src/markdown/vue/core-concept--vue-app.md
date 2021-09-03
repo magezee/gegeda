@@ -506,11 +506,13 @@ export default {
     }
   },
   computed: {
+    // 详细
     resultA: {
       get() {
         return this.x + this.y
       }
     },
+    // 简写
     resultB () {
       return this.x + this.y
     }

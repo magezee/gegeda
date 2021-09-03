@@ -42,6 +42,12 @@ const routers: routerConfigType = [
     path: '/vue',
     compoment: React.lazy(() => import('../views/vue-page'))
   },
+  {
+    id: 'architecture',
+    exact: false,
+    path: '/architecture',
+    compoment: React.lazy(() => import('../views/architecture-page'))
+  },
 
 
   // > 其他分享部分路由

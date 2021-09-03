@@ -597,6 +597,121 @@ export default {
 
 -----
 
+### v-slot
+
+类型：具体插槽名
+
+简写： `#`
+
+功能：挂载在 `<template>` 标签上，用于配合 `<solt>` 来使用
+
+> slot 标签的用法：当在子组件的 `children` 中添加内容，且在子组件中有使用 `<slot>` 标签时，会用 children 的内容替换 slot
+>
+> 如果 `<slot>` 的 innerHTMLl 中存在内容，则会在子组件没有 children 内容时生效
+
+匿名插槽：当直接在子组件 children 中添加内容时，开启匿名插槽模式
+
+```html
+<!-- Father.vue -->
+<template>
+  <div class="father">
+    <Child name="使用插槽">
+      <template>
+        <p>{{ info }}</p>
+      </template>
+    </Child>
+    
+    <Child name="不使用插槽"/>
+  </div>
+</template>
+
+
+<!-- Child.vue -->
+<template>
+  <div>
+    <div>子组件内容</div>
+    <slot><p>无children内容时展示</p></slot>
+  </div>
+</template>
+```
+
+![](https://img-blog.csdnimg.cn/090058b25c7d4a26977f895b5ee66223.png)
+
+具名插槽：在 `v-slot` 中添加的名字 xxx 会覆盖子组件对应的 `<solt name="xxx">` ，当都不添加名字时表示替换的是匿名插槽，名字是 `default`
+
+```html
+<!-- Father.vue -->
+<template>
+  <div class="father">
+    <Child>
+      <template>
+        <p>匿名插槽内容</p>
+      </template>
+      <template #A>
+        <p>A插槽的内容</p>
+      </template>
+      <template #B>
+        <p>B插槽的内容</p>
+      </template>
+    </Child>
+  </div>
+</template>
+
+<!-- Child.vue -->
+<template>
+  <div class="child">
+    <slot></slot>
+    <slot name="A"></slot>
+    <slot name="B"></slot>
+  </div>
+</template>
+```
+
+![](https://img-blog.csdnimg.cn/e85a5a77f46e4a6a97c4a8e29af1912a.png)
+
+作用域插槽：用于将子组件中绑定在 `<slot>` 上的数据传给父组件在插槽中使用
+
+```html
+<!-- Father.vue -->
+<template>
+  <div class="father">
+    <Child>
+      <!-- 在父组件中任意起一个变量名，它是一个用于接收对应solt传递的所有数据的对象 -->
+      <template #default="slotData">
+        <p>{{ slotData.info }}</p>
+      </template>
+    </Child>
+  </div>
+</template>
+
+
+<!-- Child.vue -->
+<template>
+  <div class="child">
+    <slot :info="info"></slot>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Child',
+  data() {
+    return {
+      info: '子组件数据',
+    }
+  }
+}
+</script>
+```
+
+
+
+![](https://img-blog.csdnimg.cn/26c5e5a2e50d43d8b28a6757387f5fb8.png)
+
+
+
+------
+
 ### v-pre
 
 功能：跳过该元素和子元素的 vue 编译过程，用于显示原始数据，或者大量用在没用到 vue 功能的元素上可以提高性能
@@ -622,3 +737,4 @@ export default {
 ```
 
 ![](https://raw.githubusercontent.com/magezee/images/main/pre.png)
+

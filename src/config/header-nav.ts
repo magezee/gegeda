@@ -47,6 +47,11 @@ const navConfig:navConfigType = [
         title: 'Vue',
         path: '/vue/core-concept/vue-app'
       },
+      {
+        id: 'architecture',
+        title: '综合技能',
+        path: '/architecture/linux/instructions'
+      },
     ]
   },
   {
