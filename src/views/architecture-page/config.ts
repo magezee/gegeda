@@ -15,6 +15,17 @@ const sidebarConfig:navConfigType = [
     ]
   },
   {
+    id: '第三方包',
+    title: '第三方包',
+    children: [
+      {
+        id: '通用包',
+        title: '通用包',
+        path: '/architecture/modules/general'
+      },
+    ]
+  },
+  {
     id: 'GitLab CI',
     title: 'GitLab CI',
     children: [

@@ -168,6 +168,15 @@ job-2:
 
 范围：全局、任务
 
+优先级：
+
+- `GitLab CI` 中手动点击运行任务且在 UI 上手动设置的变量
+- `.gitlab-ci.yml` 任务中设置的变量
+- `.gitlab-ci.yml` 中的全局变量
+- `GitLab CI` 上设置的变量
+
+> 一般都会给项目内部声明一个 `.env` 文件，然后通过 API 自动读取该文件信息自动在第一种方式上去设置文件中的变量，这样就能根据不同的项目中的配置读取到不同的变量了
+
 ```yaml
 variables:
   TEST_VAR: "All jobs can use this variable's value"

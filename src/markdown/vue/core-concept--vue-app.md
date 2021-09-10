@@ -532,6 +532,8 @@ export default {
 功能：用于监听实例上的属性变化
 
 > watch 可以完成 computed 的任意功能，但是 computed 不能在函数中有异步任务，因此异步数据只能交给 watch 处理
+>
+> watch 关注的是单一数据的变动，而 computed 关注的是将如何多个数据计算为一个数据
 
 配置项：
 
