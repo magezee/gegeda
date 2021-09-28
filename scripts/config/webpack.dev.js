@@ -24,7 +24,8 @@ module.exports = merge(common, {
     compress: true,               
     open: true,                   
     hot: true,         
-    noInfo: true,         
+    noInfo: true,  
+    disableHostCheck: true       
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
