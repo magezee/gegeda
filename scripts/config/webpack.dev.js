@@ -11,19 +11,14 @@ module.exports = merge(common, {
   devtool: 'cheap-module-source-map',
   target: 'web',
   output: {
-    filename: 'js/[name].js',
-    path: path.resolve(PROJECT_PATH, './dist'),
-    publicPath: '/dist',
+    filename: `[name].js`,
+    publicPath: '/',
   },
   devServer: {
     host: SERVER_HOST,
     port: SERVER_PORT,
-    historyApiFallback: {
-      rewrites: [{
-				from: /.*/g,
-				to: path.join(PROJECT_PATH, './public/index.html')
-			}],
-    },
+    contentBase: './dist',
+    historyApiFallback: true,
     stats: 'errors-only',         
     clientLogLevel: 'none',     
     compress: true,               
