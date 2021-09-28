@@ -10,12 +10,12 @@ const navConfig:navConfigType = [
       {
         id: 'js',
         title: 'JS',
-        path: '/js'
+        path: '/js/execution-context/context'
       },
       {
         id: 'css',
         title: 'CSS',
-        path: '/css'
+        path: '/css/basic/add-style'
       },
       {
         id: 'html',
@@ -35,7 +35,22 @@ const navConfig:navConfigType = [
       {
         id: 'react',
         title: 'React',
-        path: '/react'
+        path: '/react/core-concept/jsx'
+      },
+      {
+        id: 'native',
+        title: 'Native',
+        path: '/native'
+      },
+      {
+        id: 'vue',
+        title: 'Vue',
+        path: '/vue/core-concept/vue-app'
+      },
+      {
+        id: 'architecture',
+        title: '综合技能',
+        path: '/architecture/linux/instructions'
       },
     ]
   },
@@ -46,7 +61,7 @@ const navConfig:navConfigType = [
       {
         id: '实用工具',
         title: '实用工具',
-        path: '/share'
+        path: '/share/websites/code'
       },
     ]
   }

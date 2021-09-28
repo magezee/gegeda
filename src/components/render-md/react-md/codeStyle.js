@@ -1,3 +1,4 @@
+//eslint-disable-next-line
 export default {
   "pre[class*=\"language-\"]": {
     "color": "#d4d4d4",

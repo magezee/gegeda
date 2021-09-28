@@ -1,8 +1,9 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Loading from 'src/components/loading'
 import Header from 'src/components/header'
+import Footer from 'src/components/footer'
 import routers from 'src/config/routers'
 
 import './app.scss'
@@ -20,6 +21,9 @@ const App:React.FC<any> = () => {
               {routers.map((route) => <Route key={route.id} path={route.path} component={route.compoment} exact={route.exact} />)}
             </Switch>
           </React.Suspense>
+        </div>
+        <div className="footer">
+          <Footer />
         </div>
       </div>
     </Router>

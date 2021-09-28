@@ -15,7 +15,7 @@ const Header: FC = () => {
         <Navgation navigationConfig={navConfig} menuMode='horizontal' highlightLine={false} />
       </li>
       <div className="information"> 
-        <a href="https://github.com/magezee" target="_blank">
+        <a href="https://github.com/magezee" target="_blank" rel="noopener noreferrer">
           <GithubIcon />
         </a>
       </div>

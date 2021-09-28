@@ -23,7 +23,6 @@ module.exports = merge(common, {
 				from: /.*/g,
 				to: path.join(PROJECT_PATH, './public/index.html')
 			}],
-
     },
     stats: 'errors-only',         
     clientLogLevel: 'none',     

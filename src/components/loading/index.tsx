@@ -5,7 +5,7 @@ import loadingImg from './resource/loading.gif'
 const Loading:FC = () => {
   return (
     <div className="loading-content">
-      <img src={loadingImg}/>
+      <img alt="loading" src={loadingImg} />
     </div>
     
   )

@@ -116,6 +116,21 @@ function fn(value, ...params) {
 fn(1,2,3,4,5)
 ```
 
+-----
+
+#### length
+
+函数也有 `length` 属性，其表示的是函数声明时形参数量
+
+```tsx
+let fn
+fn = (x, y, z) => {}
+console.log(fn.length)			// 3
+
+fn = (x, y, z, ...rest) => {}
+console.log(fn.length)			// 3，rest参数不进行计算
+```
+
 
 
 ------
