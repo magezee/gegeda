@@ -8,9 +8,19 @@ const sidebarConfig:navConfigType = [
     title: '基本概念',
     children: [
       {
-        id: '样式引入',
-        title: '样式引入',
-        path: '/css/basic/add-style'
+        id: '选择器',
+        title: '选择器',
+        path: '/css/basic/selector'
+      },
+      {
+        id: '概念性',
+        title: '概念性',
+        path: '/css/basic/conceptual'
+      },
+      {
+        id: '布局样式',
+        title: '布局样式',
+        path: '/css/basic/layout'
       },
     ]
   },

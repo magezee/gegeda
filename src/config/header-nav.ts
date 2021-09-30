@@ -15,7 +15,7 @@ const navConfig:navConfigType = [
       {
         id: 'css',
         title: 'CSS',
-        path: '/css/basic/add-style'
+        path: '/css/basic/selector'
       },
       {
         id: 'html',

@@ -1,7 +1,6 @@
 import React from 'react'
 import RenderMd from 'src/components/render-md'
-import mdData from 'markdown/css/basic--add-style.md'
-
+import mdData from 'markdown/css/basic--selector.md'
 
 const Basic__:React.FC = () => {
   return (

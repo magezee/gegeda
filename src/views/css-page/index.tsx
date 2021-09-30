@@ -6,7 +6,7 @@ import { sidebarConfig, subRouters } from './config'
 
 const JSPage: React.FC = () => {
   return (
-    <RenderDataPage sidebarConfig={sidebarConfig}  subRouters={subRouters} sidebarTitle='JS文档'/>
+    <RenderDataPage sidebarConfig={sidebarConfig}  subRouters={subRouters} sidebarTitle='CSS文档'/>
   )
 }
 
