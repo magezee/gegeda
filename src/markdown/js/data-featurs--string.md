@@ -67,15 +67,29 @@ console.log(result)   // gegedaabcd
 - 功能：将满足条件的内容替换为指定字符串
 - 参数：
   - `target: RegExp | string`：要拼接的字符串
-  - `str: string`：替换字符串
+  - `str: string | function(match, key, index, source): string`：替换字符串
+    - match：匹配到的字符串
+    - key：捕获分组中的内容，即正则表达式需要用 `()` 表达式分组，无分组时不存在，第二个变量直接变成 index
+    - index：匹配到的字符串的开始下标
+    - source：原字符串
 - 返回值：`string`：更改后字符串
 
 ```tsx
-const str = 'gegeda'
-
+let str
+str = 'gegeda'
 console.log(str.replace(/ge/g,'da'))   // dadada
 console.log(str.replace(/ge/,'da'))    // dageda
 console.log(str.replace('ge','da'))    // dageda
+
+str = '<div>{#content#}</div>'
+const result = str.replace(/\{#(\w+)#\}/g, (match, key, index, source) => {
+  console.log(match)    // {#content#}
+  console.log(key)      // content
+  console.log(index)    // 5
+  console.log(source)   // <div>{#content#}</div>
+  return 'x'
+})
+console.log(result)     // <div>x</div>
 ```
 
 ------
@@ -282,6 +296,7 @@ const str = 'gegeda'
 
 console.log(str.includes('ge'))          // true
 console.log(str.includes('ge', 4))       // false
+console.log(str.includes(''))            // true，空字符是任意字符串的子字符
 
 console.log(str.slice(4))                // da
 ```

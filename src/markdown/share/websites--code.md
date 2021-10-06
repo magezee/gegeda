@@ -20,6 +20,14 @@
 
 
 
+----
+
+**[typescriptlang](https://www.typescriptlang.org/zh/play)**
+
+介绍：在线的 typescript 环境，可以在线练习代码
+
+
+
 ------
 
 ### 组件库
@@ -57,3 +65,13 @@
 介绍：模拟接口请求数据，有较多 mock 数据方案
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2021061819091151.png)
+
+
+
+### 调试
+
+**[responsively](https://responsively.app/download)**
+
+可以输入网址调试响应式样式，无需打开控制台
+
+![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a600a24ecf824616a180fa1509b43cba~tplv-k3u1fbpfcp-watermark.awebp?)

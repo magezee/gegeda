@@ -1,0 +1,13 @@
+import React from 'react'
+import RenderMd from 'src/components/render-md'
+import mdData from 'markdown/vue/api--global-method.md'
+
+
+const GlobalMethod__:React.FC = () => {
+  return (
+    <RenderMd mdData={mdData}/>
+  )
+}
+
+
+export default GlobalMethod__

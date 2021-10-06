@@ -686,7 +686,7 @@ console.log(arr.every(callback))      // true
 
 **array.some (mapFn, thisArg?)** 
 
-- 功能：判断数组内所有的元素是否都符合条件
+- 功能：判断数组内是否有元素符合条件
 - 参数：
   - `mapFn: function(item, index, arr)`：map 条件回调函数，需要有 return 值
   - `thisArg?: any`：更改回调函数绑定的 this（使用该参数时回调函数不能写成箭头函数形式）
