@@ -20,7 +20,7 @@ const navConfig:navConfigType = [
       {
         id: 'html',
         title: 'HTML',
-        path: '/html'
+        path: '/html/basic/element'
       },
       {
         id: 'node',

@@ -25,6 +25,12 @@ const routers: routerConfigType = [
     compoment: React.lazy(() => import('../views/css-page'))
   },
   {
+    id: 'html',
+    exact: false,
+    path: '/html',
+    compoment: React.lazy(() => import('../views/html-page'))
+  },
+  {
     id: 'react',
     exact: false,
     path: '/react',

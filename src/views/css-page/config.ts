@@ -22,6 +22,37 @@ const sidebarConfig:navConfigType = [
         title: '布局样式',
         path: '/css/basic/layout'
       },
+      {
+        id: '盒子样式',
+        title: '盒子样式',
+        path: '/css/basic/box'
+      },
+      {
+        id: '变形与动画',
+        title: '变形与动画',
+        path: '/css/basic/animation'
+      },
+    ]
+  },
+  {
+    id: '代码设计',
+    title: '代码设计',
+    children: [
+      {
+        id: '选择器',
+        title: '选择器',
+        path: '/css/code/selector-design'
+      },
+      {
+        id: '布局',
+        title: '布局',
+        path: '/css/code/layout-design'
+      },
+      {
+        id: '技巧',
+        title: '技巧',
+        path: '/css/code/technique'
+      },
     ]
   },
 ]

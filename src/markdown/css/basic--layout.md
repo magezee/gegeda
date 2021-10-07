@@ -773,3 +773,153 @@ z-index 属性设置元素的堆叠顺序，拥有更高堆叠顺序的元素总
   center       /* 居中 */
   ```
 
+
+
+----
+
+### 响应式布局
+
+`@media` 针对不同的媒体类型定义不同的样式，可用于设计响应式的页面
+
+**媒体类型**
+
+| 值     | 描述                               |
+| :----- | :--------------------------------- |
+| all    | 用于所有设备                       |
+| print  | 用于打印机和打印预览               |
+| screen | 用于电脑屏幕，平板电脑，智能手机等 |
+| speech | 应用于屏幕阅读器等发声设备         |
+
+**媒体功能**
+
+| 值                      | 描述                                                         |
+| :---------------------- | :----------------------------------------------------------- |
+| aspect-ratio            | 输出设备中的页面可见区域宽度与高度的比率                     |
+| color                   | 输出设备每一组彩色原件的个数。如果不是彩色设备，则值等于0    |
+| color-index             | 在输出设备的彩色查询表中的条目数。如果没有使用彩色查询表，则值等于0 |
+| device-aspect-ratio     | 输出设备的屏幕可见宽度与高度的比率                           |
+| device-height           | 输出设备的屏幕可见高度                                       |
+| device-width            | 输出设备的屏幕可见宽度                                       |
+| grid                    | 用来查询输出设备是否使用栅格或点阵                           |
+| height                  | 输出设备中的页面可见区域高度                                 |
+| max-aspect-ratio        | 输出设备的屏幕可见宽度与高度的最大比率                       |
+| max-color               | 输出设备每一组彩色原件的最大个数                             |
+| max-color-index         | 在输出设备的彩色查询表中的最大条目数                         |
+| max-device-aspect-ratio | 输出设备的屏幕可见宽度与高度的最大比率                       |
+| max-device-height       | 输出设备的屏幕可见的最大高度                                 |
+| max-device-width        | 输出设备的屏幕最大可见宽度                                   |
+| max-height              | 输出设备中的页面最大可见区域高度                             |
+| max-monochrome          | 在一个单色框架缓冲区中每像素包含的最大单色原件个数           |
+| max-resolution          | 设备的最大分辨率                                             |
+| max-width               | 输出设备中的页面最大可见区域宽度                             |
+| min-aspect-ratio        | 输出设备中的页面可见区域宽度与高度的最小比率                 |
+| min-color               | 输出设备每一组彩色原件的最小个数                             |
+| min-color-index         | 在输出设备的彩色查询表中的最小条目数                         |
+| min-device-aspect-ratio | 输出设备的屏幕可见宽度与高度的最小比率                       |
+| min-device-width        | 输出设备的屏幕最小可见宽度                                   |
+| min-device-height       | 输出设备的屏幕的最小可见高度                                 |
+| min-height              | 输出设备中的页面最小可见区域高度                             |
+| min-monochrome          | 在一个单色框架缓冲区中每像素包含的最小单色原件个数           |
+| min-resolution          | 设备的最小分辨率                                             |
+| min-width               | 输出设备中的页面最小可见区域宽度                             |
+| monochrome              | 在一个单色框架缓冲区中每像素包含的单色原件个数。如果不是单色设备，则值等于0 |
+| orientation             | 输出设备中的页面可见区域高度是否大于或等于宽度（portrait \| landscape）portrait匹配高度大于或等于宽度 |
+| resolution              | 设备的分辨率。如：96dpi, 300dpi, 118dpcm                     |
+| scan                    | 电视类设备的扫描工序                                         |
+| width                   | 输出设备中的页面可见区域宽度                                 |
+
+**逻辑关系**
+
+- 与：`and`
+- 或：`,`（不是用or）
+
+- 非：`not`
+- 仅：`only`（和not一样放在总表达式前，自动只能排除低端浏览器）
+
+```css
+/* not一般放在表达式的前面 */
+/* 宽度不是200px~400px时启用该样式 相当于not( screen and (max-width: 400px) and (min-width:200px) ) */
+@media not screen and (max-width: 400px) and (min-width:200px)  {
+  main {
+    height: 100px;
+    width: 100px;
+    border: 1px solid;
+    background-color: blue;
+  }
+}
+```
+
+```css
+/* 如果文档宽度小于 300 像素则启用该样式 */
+@media screen and (max-width: 300px) {
+  body {
+    background-color:lightblue;
+  }
+}
+```
+
+> 这里应用的样式并不是完全覆盖而是添加的关系，相当于在原来的基础上声明了新的属性，如果同名属性则覆盖
+
+```css
+/* 当窗口宽度不超过400px时添加背景颜色，注意启用样式后仍有宽高和边框样式，因为只是相当于新添了背景属性 */
+@media screen and (max-width: 400px) {
+  main {
+    background-color: blue;
+  }
+}
+
+main {    
+  width: 100px;
+  height: 100px;
+  border: 1px solid;
+}
+```
+
+> 如果需要根据条件完全更改样式，则全部的样式应该声明在条件内部
+
+```css
+/* 因为200宽度以下的样式没有设置，因此宽度200px以下无main的样式 */
+@media screen and (max-width: 400px) and (min-width:200px)  {
+  main {
+    margin: 100px;
+    width: 100px;
+    border: 1px solid;
+    background-color: blue;
+  }
+}
+
+@media screen and (min-width: 400px) {
+  main {
+    height: 100px;
+    width: 100px;
+    border: 1px solid;
+    background-color: yellow;
+  }
+}
+```
+
+> 由于后声明的优先级更高，如果一个样式的匹配范围A比B大，则A应声明在前
+>
+> 不过一般指定具体范围值，就不需要费心考虑顺序了
+
+```css
+/* >400比>600的范围要广，>600的时候一定也>400，因此如果后声明>400，则永远不会匹配到>600的内容 */
+@media screen and (min-width: 400px) {
+  main {
+    margin: 100px;
+    width: 100px;
+    border: 1px solid;
+    background-color: blue;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  main {
+    height: 100px;
+    width: 100px;
+    border: 1px solid;
+    background-color: yellow;
+  }
+}
+```
+
