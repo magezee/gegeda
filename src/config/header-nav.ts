@@ -25,12 +25,12 @@ const navConfig:navConfigType = [
       {
         id: 'node',
         title: 'Node',
-        path: '/node'
+        path: '/node/protogenesis/concept'
       },
       {
         id: '浏览器',
         title: '浏览器',
-        path: '/browser'
+        path: '/browser/concept/http'
       },
       {
         id: 'react',
@@ -48,9 +48,9 @@ const navConfig:navConfigType = [
         path: '/vue/core-concept/vue-app'
       },
       {
-        id: 'architecture',
+        id: 'synthesize',
         title: '综合技能',
-        path: '/architecture/linux/instructions'
+        path: '/synthesize/linux/instructions'
       },
     ]
   },

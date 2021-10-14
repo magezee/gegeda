@@ -6,7 +6,7 @@
 
 ```html
 <div class="container">
-  <div c;ass="left"/>
+  <div class="left"/>
   <div class="main"/>
 </div>
 ```

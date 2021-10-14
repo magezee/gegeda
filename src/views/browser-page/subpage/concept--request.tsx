@@ -1,13 +1,13 @@
 import React from 'react'
 import RenderMd from 'src/components/render-md'
-import mdData from 'markdown/architecture/gitlab-ci--keyword.md'
+import mdData from 'markdown/browser/concept--request.md'
 
 
-const Keyword__:React.FC = () => {
+const Code__:React.FC = () => {
   return (
     <RenderMd mdData={mdData}/>
   )
 }
 
 
-export default Keyword__
+export default Code__

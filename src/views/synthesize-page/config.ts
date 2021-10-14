@@ -10,18 +10,18 @@ const sidebarConfig:navConfigType = [
       {
         id: '指令',
         title: '指令',
-        path: '/architecture/linux/instructions'
+        path: '/synthesize/linux/instructions'
       },
     ]
   },
   {
-    id: '第三方包',
-    title: '第三方包',
+    id: 'Git',
+    title: 'Git',
     children: [
       {
-        id: '通用包',
-        title: '通用包',
-        path: '/architecture/modules/general'
+        id: '使用',
+        title: '使用',
+        path: '/synthesize/git/use'
       },
     ]
   },
@@ -32,17 +32,17 @@ const sidebarConfig:navConfigType = [
       {
         id: '基本使用',
         title: '基本使用',
-        path: '/architecture/gitlab-ci/basic-use'
+        path: '/synthesize/gitlab-ci/basic-use'
       },
       {
         id: 'YAML',
         title: 'YAML',
-        path: '/architecture/gitlab-ci/yaml'
+        path: '/synthesize/gitlab-ci/yaml'
       },
       {
         id: '关键字',
         title: '关键字',
-        path: '/architecture/gitlab-ci/keyword'
+        path: '/synthesize/gitlab-ci/keyword'
       },
     ]
   }

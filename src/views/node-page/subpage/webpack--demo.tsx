@@ -1,13 +1,13 @@
 import React from 'react'
 import RenderMd from 'src/components/render-md'
-import mdData from 'markdown/architecture/gitlab-ci--yaml.md'
+import mdData from 'markdown/node/webpack--demo.md'
 
 
-const YAML__:React.FC = () => {
+const Demo__:React.FC = () => {
   return (
     <RenderMd mdData={mdData}/>
   )
 }
 
 
-export default YAML__
+export default Demo__

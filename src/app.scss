@@ -17,13 +17,13 @@ $header-height: 50px;
   .main {
     margin-top: $header-height;
     background-color: $white;
-    min-height: 90vh;
+    min-height: 100vh;
   }
 
   .footer {
     position: relative;
-    width: 100%;
-    left: 0;
+    width: 50%;
+    left: 25%;
     bottom: 0;
     z-index: 999;
     border-top: solid 1px #ddd;

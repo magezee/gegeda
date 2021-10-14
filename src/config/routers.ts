@@ -31,6 +31,18 @@ const routers: routerConfigType = [
     compoment: React.lazy(() => import('../views/html-page'))
   },
   {
+    id: 'browser',
+    exact: false,
+    path: '/browser',
+    compoment: React.lazy(() => import('../views/browser-page'))
+  },
+  {
+    id: 'node',
+    exact: false,
+    path: '/node',
+    compoment: React.lazy(() => import('../views/node-page'))
+  },
+  {
     id: 'react',
     exact: false,
     path: '/react',
@@ -49,10 +61,10 @@ const routers: routerConfigType = [
     compoment: React.lazy(() => import('../views/vue-page'))
   },
   {
-    id: 'architecture',
+    id: 'synthesize',
     exact: false,
-    path: '/architecture',
-    compoment: React.lazy(() => import('../views/architecture-page'))
+    path: '/synthesize',
+    compoment: React.lazy(() => import('../views/synthesize-page'))
   },
 
 
