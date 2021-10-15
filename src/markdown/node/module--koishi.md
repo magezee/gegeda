@@ -12,7 +12,7 @@
 
 go-cqhttp 包含 `config.yml` 和 `device.json` 两个配置文件, 其中 `config.yml` 为运行配置 `device.json` 为虚拟设备信息，[配置信息](https://docs.go-cqhttp.org/guide/config.html#%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF)
 
-> 注意：在 linux 环境中启动程序生成的文件放在了 `/user` 路径下而非程序的目录
+> 注意：在 linux 环境中启动程序生成的文件放在了用户家目录下
 >
 > `config.yml` 会在首次运行 go-cqhttp 的时候自动生成，`device.json` 会在首次登陆账户的时候自动生成
 
@@ -30,7 +30,7 @@ go-cqhttp 包含 `config.yml` 和 `device.json` 两个配置文件, 其中 `conf
 
 ```shell
 # 选择一个文件夹充当项目文件夹并在根目录执行
-yarn init
+yarn init -y
 yarn add koishi koishi-adapter-onebot koishi-plugin-common -D
 ```
 
@@ -69,7 +69,7 @@ module.exports = {
     token: '这里填写QQ密码',
   }],
   plugins: {
-    
+    'common': {}
   },
 }
 ```
@@ -112,6 +112,18 @@ module.exports = (ctx) => {
 app.plugin(require('./plugin'))
 ```
 
+```tsx
+// koishi.config.js
+odule.exports = {
+  // ...
+  plugins: {
+    './my-plugin': true, // true 和 {} 的效果等价
+  },
+}
+```
+
+
+
 使用 `850300443 咯咯哒` 作为机器人载体，`2536671541 秋刀鱼` 作为触发机器人的发言用户，分别在私聊和群聊 `56546216` 中发言，拿到的 `session` 信息如下：
 
 ![](https://img-blog.csdnimg.cn/fc3f27bac35c49e9a8bd6cb271b49fd8.png)
@@ -127,6 +139,36 @@ app.plugin(require('./plugin'))
 **中间件使用**
 
 
+
+
+
+
+
+
+
+-----
+
+### 指令
+
+> [官方文档](https://koishi.js.org/guide/command.html)
+
+使用 `app.command()` 定义指令，指令通过 `指令名 指令参数` 的方式触发
+
+```tsx
+app.command('test <message>')
+  .action((_, message) => {
+    // 机器人操作
+})
+```
+
+> `_` 为 Argv 对象，该对象包含会话对象 `Session`
+
+```tsx
+app.command('test <message>')
+  .action((_, message) => {
+    _.session.send(`发送的信息为${message}`)
+})
+```
 
 
 
