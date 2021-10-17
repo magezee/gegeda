@@ -29,7 +29,7 @@ go-cqhttp 包含 `config.yml` 和 `device.json` 两个配置文件, 其中 `conf
 使用 koishi 接入机器人，首先需安装 koishi 及相关库
 
 ```shell
-# 选择一个文件夹充当项目文件夹并在根目录执行
+选择一个文件夹充当项目文件夹并在根目录执行
 yarn init -y
 yarn add koishi koishi-adapter-onebot koishi-plugin-common -D
 ```
@@ -114,7 +114,7 @@ app.plugin(require('./plugin'))
 
 ```tsx
 // koishi.config.js
-odule.exports = {
+module.exports = {
   // ...
   plugins: {
     './my-plugin': true, // true 和 {} 的效果等价
@@ -169,6 +169,101 @@ app.command('test <message>')
     _.session.send(`发送的信息为${message}`)
 })
 ```
+
+
+
+-----
+
+### 消息段
+
+可以用消息段控制 koishi 发送特定媒体或者做特定操作，它的原理是使用 `CQcode` 让 QQ 知道一个用户的操作，由于接入 QQ 使用的是 go-cqhttp，因此在 koishi 中消息段完全对应该框架， [CQcode参考](https://docs.go-cqhttp.org/cqcode/)
+
+```tsx
+// >输入指令发图，则会发出一张指定图片地址的图片
+const { segment } = require('koishi')
+
+function apply(ctx) {
+ctx
+  .command('send.img', '发送图片指令')
+  .shortcut('发图')
+  .action(async ({ session }) => {
+    return segment('image', { url: xxx })   // segment传的值为CQcode，配置在上面参考 
+  }
+```
+
+
+
+
+
+
+
+
+
+
+
+-----
+
+### 特别补充
+
+#### QQxml
+
+koishi 可以通过 QQcode 去发送一段 xml 代码，这段 xml 会被 QQ 内部解析，然后变成特定的消息效果，如 QQ 的卡片信息，这里主要补充 QQ 卡片的 xml 写法
+
+xml 代码需要有专门的头部声明，如下所示
+
+```xml
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+```
+
+QQ 卡片使用 `<msg></msg>` 标签进行包裹内容
+
+```xml
+<msg serviceID="1" templateID="1" action="web" brief="点击进入直播间" sourceMsgId="0" url="https://live.bilibili.com/21452505?spm_id_from=333.999.0.0" flag="0" adverSign="0" multiMsgFlag="0">
+  <!-- 卡片内容 -->
+</msg>
+```
+
+> brief：在聊天框外看到的预览信息
+>
+> url：点击卡片进行跳转
+>
+> 其他的暂不知道什么效果
+
+以下是试出来的两种 xml 卡片的模板，其他的配置尝试感觉有点问题
+
+```xml
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+  <msg serviceID="1" templateID="1" action="web" brief="点击进入直播间" sourceMsgId="0" url="https://live.bilibili.com/21452505?spm_id_from=333.999.0.0" flag="0" adverSign="0" multiMsgFlag="0">
+  <item layout="6" advertiser_id="0" aid="0">
+  <picture cover="http://gchat.qpic.cn/gchatpic_new/0/530077417-0-094758B3DD39603D0E8563D47959D8E7/0" w="0" h="0" />
+  </item>
+  <item layout="6" advertiser_id="0" aid="0">
+  <title>海子姐直播间</title>
+    <summary>直播状态：${liveStatus}${liveStartTime}${liveTime}</summary>
+  </item>
+  <source name="哔哩哔哩" icon="http://gchat.qpic.cn/gchatpic_new/0/530077417-0-01006648643525F8630A9A97C5959700/0" action="" appid="-1" />
+</msg>
+```
+
+![](https://img-blog.csdnimg.cn/bed666a900a74c348fc0c207a6a4d661.png)
+
+```xml
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<msg serviceID="1" templateID="1" action="web" brief="点击进入直播间" sourceMsgId="0" url="https://live.bilibili.com/21452505?spm_id_from=333.999.0.0" flag="0" adverSign="0" multiMsgFlag="0">
+  <item layout="2" advertiser_id="0" aid="0">
+    <picture cover="http://gchat.qpic.cn/gchatpic_new/0/530077417-0-094758B3DD39603D0E8563D47959D8E7/0" w="0" h="0" />
+    <title>海子姐直播间</title>
+    <summary>直播状态：${liveStatus}${liveStartTime}${liveTime}</summary>
+  </item>
+  <source name="哔哩哔哩" icon="http://gchat.qpic.cn/gchatpic_new/0/530077417-0-01006648643525F8630A9A97C5959700/0" action="" appid="-1" />
+</msg>
+```
+
+![](https://img-blog.csdnimg.cn/8c0788d95d0e4f5499d80ad1a4849f1f.png)
+
+
+
+> 注意：直接使用网络的图片在手机上可以正常显示在卡片中，但是在 PC 端则会裂掉，这是因为 PC 卡片引用用的是 QQ 自己的图床内的图，需要手动拿到一张下载的图片的 MD5 的值（需全部转为大写）然后使用 QQ 发送一段信息 `http://gchat.qpic.cn/gchatpic_new/0/530077417-0-<把md5值填在这，不需要尖括号>/0 `，这样就可以实现在 PC 也显示卡片的图片，[B站教程](https://www.bilibili.com/video/av754152408/)
 
 
 
