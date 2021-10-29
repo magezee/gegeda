@@ -320,18 +320,20 @@ URL中包含锚点（#），如 `#contact`，则该选择器则匹配id为contac
 
 ```html
 <div>
-  <ul>                <!-- ul:only-of-type -->
-    <li>one</li>      <!-- li:nth:child(2n+1) -->  <!-- li:first-child -->
-    <li>two</li>      <!-- li:nth-child(2) -->
-    <li>three</li>    <!-- li:nth:child(2n+1) -->  <!-- li:last-child -->
+  <ul>                <!-- div ul:only-of-type -->
+    <li>one</li>      <!-- ul li:nth:child(2n+1) -->  <!-- ul li:first-child -->
+    <li>two</li>      <!-- ul li:nth-child(2) -->
+    <li>three</li>    <!-- ul li:nth:child(2n+1) -->  <!-- ul li:last-child -->
   </ul>
   <div>abc</div>      <!-- div div:first-of-type --> 
   <p>para</p>
   <div>def</div>      <!-- div div:last-of-type -->
-  <p>para</p>         <!-- p:nth-of-type(2) -->
+  <p>para</p>         <!-- div p:nth-of-type(2) -->
   <b>ghi</b>
 </div>
 ```
+
+> 可以与任意选择器搭配使用，如 `.container .title:first-child` 就代表选择选择 `.container` 元素下的第一个 `.title` 元素
 
 ```markdown
 n：
