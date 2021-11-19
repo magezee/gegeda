@@ -35,6 +35,26 @@ const sidebarConfig:navConfigType = [
     ]
   },
   {
+    id: '高级技巧',
+    title: '高级技巧',
+    children: [
+      {
+        id: 'Css',
+        title: 'Css',
+        path: '/css/advanced-skill/css'
+      },
+      {
+        id: 'Less',
+        title: 'Less',
+        path: '/css/advanced-skill/less'
+      },{
+        id: 'Scss',
+        title: 'Scss',
+        path: '/css/advanced-skill/scss'
+      },
+    ]
+  },
+  {
     id: '代码设计',
     title: '代码设计',
     children: [

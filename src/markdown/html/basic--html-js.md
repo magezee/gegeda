@@ -1,245 +1,451 @@
-## 操作元素
+## 操作DOM
 
-### 操作DOM
-
-Dom 的概念：
+有以下几种 dom：
 
 - `Document`：文档
 - `Element`：元素节点，如 `<html> <head> <body> <p> <h1>` 等
 - `Text`：文本节点，如 `<html> <head> <body> <ul>` 等结构元素不会直接包含任何文本节点
-- `Attribute`：属性节点 如`<img src="images/1.gif" title="个人相册" />` 的 title 就是属性节点
+- `Attribute`：属性节点 如 `<img src="images/1.gif" title="个人相册" />` 的 title 就是属性节点
 
-#### 获取节点
+> 一般而言，元素节点内部都会默认包含一个文本节点，如 `<ul></ul>` 包含一个元素节点 `ul` 和一个文本节点 `text`，文本内容为 null 
+>
+> 如果是 `<ul><li></li></ul>` 则会有两个文本节点，分别来自于 `ul` 和 `li`
 
-**getElementsByID()**
+**Node和Element的区别**
 
-根据 id 获取节点，还有根据 tap，class，name 等，不列举
-
--------
-
-**document.querySelector()**
-
-根据选择器获取节点W
+Element 继承于 Node，因此元素一定是节点，而节点不一定是元素
 
 ```tsx
-document.querySelector('#id')
+console.log(document.body instanceof Element)    // true
+console.log(document.body instanceof Node)       // true
 ```
 
-------
 
-**childNodes**
-
-获取指定元素的所有子节点，返回值为一个 `nodeList`，里面装的是节点对象（即使某个元素只有一个子节点 childNode属性也会返回一个`nodeList`
-
-```tsx
-var tag = document.getElementsByTagName("ul")      // 获取网页文档中"name = ul"的所有节点对象
-var a = tag[0].childNodes                          // 获取第一个 "ul" 对象
-alert(a[0].nodeName)  
-```
-
-> 需要使用数组的方法时，需要先变化成数组
-
-```tsx
-// 查找指定dom在父元素中的下标
-const nodeArr = Array.from(dom.parentNode.childNodes)
-const nodeIndex = nodeArr.indexOf(dom)
-```
-
--------
-
-**haschildNodes**
-
-判断某个元素是否包含子节点
 
 --------
 
-**firstChild**
+### 获取元素
 
-```tsx
-node.childNodes[0] == node.firstChild
-```
+**document.getElementById (id)**
 
--------
+- 功能：根据元素 id 获取元素节点
+- 参数：
+  - `id: string`：元素 id
+- 返回：`element`，满足条件元素
 
-**lastChild**
+----
 
-```tsx
-node.childNode[node.childNodes.length-1] == node.lastChild
-```
+**document.querySelector (selector)**
 
-------
+- 功能：根据选择器获取第一个满足条件的元素
+- 参数：
+  - `selector: string`：选择器
+- 返回：`element`，满足条件元素
 
-**parentNode**
+-----
 
-返回指定节点父节点
+**document.getElementsByClassName (class)**
 
-永远返回的是元素节点，因为只有元素节点才能包含子节点 ，document没有父节点 将返回null 
-
----------
-
-**nextSibling**
-
-返回一个指定节点的下一个相邻节点
-
--------
-
-**previousSibling**
-
-返回一个指定节点的上一个相邻节点
+- 功能：根据 class 获取所有足条件的元素
+- 参数：
+  - `class: string`：元素类名
+- 返回：`HTMLCollection`，满足条件类数组对象
 
 ------
 
-**nodeName**
+**document.getElementsByTagName (tag)**
 
-返回节点名称
+- 功能：根据元素标签名获取所有足条件的元素
+- 参数：
+  - `tag: string`：元素标签名
+- 返回：`HTMLCollection`，满足条件类数组对象
 
-> 如果是元素节点，则返回值为标签名称 标签名称永远是大写
->
-> 如果是属性节点，则返回值为属性的名称
->
-> 如果是文本节点，则返回值永远是 #text 标识符
->
-> 如果是文档节点，则返回值永远是 #document 标识符
+``` tsx
+<div id="container" class="container">
+	<div>内容</div>
+</div>
+
+// 完全相等
+document.getElementById('container')
+document.querySelector('.container')
+document.getElementsByClassName('container')[0]
+document.getElementsByTagName('div')[0]
+```
+
+
 
 -------
 
-**nodeType**
+### 元素属性
 
-返回节点类型
+#### 层级
 
-> 1——表示元素
->
-> 2——表示属性
->
-> 3——表示文本
->
-> 8——表示注释
->
-> 9——表示文档
-
-```tsx
-if(document.getElementsByTagName("ul"[0].nodeType == 1 )) alert("元素")
+```html
+<ul>
+  <li class="a">A</li>
+  <li class="b"><p>B</p></li>
+  <li class="c"><div>C</div></li>
+  <li class="d"></li>
+</ul>
 ```
 
----
+**elemet.parentNode**
 
-#### 操作节点
-
-**createElement()**
-
-根据参数指定的名称创建一个新的元素节点并返回新建元素节点对象
+- 功能：获取当前元素的父节点
+- 返回：`element`，父节点
 
 ```tsx
-// 使用createElement()创建的新节点元素不会自动添加到文档结构中，此时节点还没有NodeParent属性，只是存储在内存中的DocumentFragment对象，仅在JS上下文中有效
-// 如果需要把这个DocumentFragment对象添加到文档中 则需要使用appendChild()、insertBefore()或replaceChild()方法实现
-var ele = document.createElement("element")  
-document.body.appendChild(ele)     //增加节点到body元素下
-```
-
-------
-
-**creatTextNode()**
-
-为新建或已存在的的元素插入文本内容，该方法返回一个指向新建文本节点的引用（同不会自动添加到文本结构中）
-
-```tsx
-var p = document.createElement("p");        
-var h1 = document.createElement("h1");      
-var txt = document.creatTextNode("Hello World");        // 不能包含任何html标签
-p.appendChild(txt);     // 把文本节点添加到段落节点中
-h1.appendChild(p);      // 把段落节点添加到标题节点中
-document.body.appendChild(h1);      //把标题节点添加到body节点中
-// <body> <h1> <p> Hello World </p> </h1> </body>
-```
-
--------
-
-**childNode()**
-
-复制一个节点，该方法能给节点创建一个副本，被复制的节点和元节点具有完全一样的nodeTpye和nodeName属性值
-
-```tsx
-var ele = node.childNode(deep);		// ele 表示返回一个复制的节点  node表示一个已经存在的节点，也就是被复制的节点
-// deep 是一个布尔值
-// 为true时 复制的节点将包含所有子节点内容
-// 为flase时 复制的节点仅包含指定对象本身，不包含任何子节点，如果被复制的节点是一个元素节点，其包含的所有文本将不会被复制，因为文本节点时子节点，但是属性节点将会被复制
-// 由于复制后会完整地复制原节点的所有属性，但是id不能重复，所以应在复制后修改某个节点的id值
-```
-
-------
-
-**appendChild()**
-
-把新创建的节点插入到某个指定元素下，新增节点可以被添加到文档的任何一个元素下面，默认将位于元素所包含的全部子节点的末尾
-
-```tsx
-var new_e = ele.appendChild(new_e);		// 把参数节点对象new_e增加到ele元素的下面并返回新增节点的引用
-```
-
--------
-
-**insertBefore()**
-
-把一个指定的节点插入到给定元素中，可让所插入的节点位于指定元素的指定子节点的前面，而不是放在最后面
-
-```tsx
-var new_e = ele.insertBefore(new_e,traget_node);	// 把new_e节点对象添加到到ele的元素的子节点traget_node前面，并返回这个新增节点引用
-// 如果不给traget_node 则自动放在最后位 作用与appendChild()一样
-```
-
-可以用appendChild和inserBefore来移动指定元素位置 移动时会先删掉原来的再插入到新的位置
-
--------
-
-**removeChild()**
-
-```tsx
-var noede = ele.removeChild(node);		// 删除ele元素节点中的node(node所有子节点会一并删除) 返回被删除的节点的对象引用
+const element = document.querySelector('p')
+console.log(element.parentNode)      // <li></li>
 ```
 
 -----
 
-**replaceChild()**
+**elemet.parentElement**
+
+- 功能：获取当前元素的父元素
+- 返回：`element`，父元素
+
+> 一般情况下 `parentElement 和 parentNode` 结果完全相同，但是也有特例，如根节点 `document` 并不是元素，无法用 `parentElement` 拿到
 
 ```tsx
-var oldNode = ele.replaceChild(newNode,oldNode);	// 用newNode节点替换ele的子节点oldNode   返回被替换的oldNode对象的引用
+const element = document.querySelector('p')
+console.log(element.parentElement)         // <li></li>
 ```
+
+**elemet.children**
+
+- 功能：获取当前元素的所有子元素节点（不包括孙节点）
+- 返回：`HTMLCollection`，所有子元素节点的类数组对象
+
+```tsx
+const element = document.querySelector('ul')
+console.log(Array.from(element.children))         // [li, li, li]
+```
+
+-----
+
+**elemet.childNodes**
+
+- 功能：获取当前元素的所有节点，包括文本节点（不包括孙节点）
+- 返回：`HTMLCollection`，所有子节点的类数组对象
+
+```tsx
+const element = document.querySelector('ul')
+console.log(Array.from(element.childNodes))         // [text, li, text, li, text, li, text]
+```
+
+-----
+
+**elemet.firstElementChild**
+
+- 功能：获取当前元素的首个子元素
+- 返回：`element`，首个子元素
+
+```tsx
+const element = document.querySelector('ul')
+console.log(element.firstElementChild === element.children[0])    // true
+```
+
+-----
+
+**elemet.firstElementChild**
+
+- 功能：获取当前元素的末尾子元素
+- 返回：`element`，末尾子元素
+
+```tsx
+const element = document.querySelector('ul')
+console.log(element.children[element.children.length-1] == element.lastElementChild)    // true
+```
+
+-----
+
+**elemet.previousElementSibling**
+
+- 功能：获取当前元素上一个兄弟元素
+- 返回：`element`，上一个兄弟元素
+
+```tsx
+const element = document.querySelector('.b')
+console.log(element.previousElementSibling)   // <li class="a"></li>
+```
+
+-----
+
+**elemet.nextElementSibling**
+
+- 功能：获取当前元素下一个兄弟元素
+- 返回：`element`，下一个兄弟元素
+
+```tsx
+const element = document.querySelector('.b')
+console.log(element.nextElementSibling)   // <li class="c"></li>
+```
+
+------
+
+**elemet.haschildNodes ()** 
+
+- 功能：判断当前元素是否有子节点
+- 参数：无
+- 返回：`boolean`，判断结果
+
+```tsx
+let element = document.querySelector('.a')
+console.log(element.hasChildNodes())          // true
+
+element = document.querySelector('.d')
+console.log(element.hasChildNodes())          // false，text节点无内容则算无子节点
+```
+
+
+
+-----
+
+#### 增删
+
+**document.createElement (nodeName)**
+
+- 功能：创建指定节点元素
+- 参数：
+  - `nodeName: string`：节点名称
+- 返回：`element`，创建的元素
+
+> 创建元素后需要插入一个父元素中才算在 dom 树中存在
+
+```tsx
+const element = document.createElement('div')  
+document.body.appendChild(element)     // 添加到<body></body>中
+```
+
+-----
+
+**element.appendChild (node)**
+
+- 功能：将一个节点插入指定元素的子元素末尾
+- 参数：
+  - `node: Node`：节点
+- 返回：`element`，插入的节点
+
+```tsx
+<ul>
+  <li class="a">A</li>
+</ul>
+
+const element = document.createElement('div')  
+document.querySelector('ul').appendChild(element)
+
+/* 
+<ul>
+  <li class="a">A</li>
+  <div></div>
+</ul>
+*/
+```
+
+----
+
+**element.insertBefore (node, targetNode?)**
+
+- 功能：将一个节点插入指定元素的指定子节点之前
+- 参数：
+  - `node: Node`：插入的节点
+  - `targetNode?`：指定元素的子节点，如果不赋值则插入到末尾
+- 返回：`element`，插入的节点
+
+```tsx
+<ul>
+  <li class="a">A</li>
+</ul>
+
+const element = document.createElement('div')  
+document.querySelector('ul').insertBefore(element, document.querySelector('.a'))
+
+/* 
+<ul>
+  <div></div>
+  <li class="a">A</li>
+</ul>
+*/
+```
+
+**element.removeChild (node)**
+
+- 功能：删除一个元素中的指定子节点
+- 参数：
+  - `node: Node`：节点
+- 返回：`element`，删除的子节点
+
+```tsx
+<ul>
+  <li class="a">A</li>
+</ul>
+
+const element = document.querySelector('ul')
+element.removeChild(document.querySelector('.a'))
+
+/* 
+<ul></ul>
+*/
+```
+
+------
+
+**element.replaceChild (node, targetNode)**
+
+- 功能：用指定节点替换元素中的目标子节点
+- 参数：
+  - `node: Node`：替换的节点
+  - `targetNode`：指定元素的子节点
+- 返回：`element`，被替换的节点
+
+```tsx
+<ul>
+  <li class="a">A</li>
+</ul>
+
+const element = document.querySelector('ul')
+const newElement = document.createElement('div')  
+element.replaceChild(newElement, document.querySelector('.a'))
+
+/* 
+<ul>
+	<div></div>
+</ul>
+*/
+```
+
+
+
+-------
+
+#### 属性
+
+**element.nodeName**
+
+- 功能：返回节点名
+- 返回：`string`，节点名
+  - 元素节点：返回值为标签名称（大写字母）
+  - 属性节点：返回值为属性的名称
+  - 文本节点：返回值永远是 `#text` 标识符
+  - 文档节点：返回值永远是 `#document` 标识符
+
+```tsx
+console.log(document.body.nodeName)   // BODY
+```
+
+-----
+
+**element.nodeType**
+
+- 功能：返回节点类型
+- 返回：`number`，节点类型
+  - 1：元素节点
+  - 2：属性节点
+  - 3：文本节点
+  - 8：注释节点
+  - 9：文档节点
+
+```tsx
+console.log(document.body.nodeName)   // 1
+```
+
+-----
+
+**element.getAttribute (props)**
+
+- 功能：获取元素上指定 props 的值
+- 参数：
+  - `props: string`：指定 props 属性
+- 返回：`string`，props 的值
+
+```tsx
+<ul>
+  <li style="background-color: red;"></li>
+</ul>
+
+const element = document.querySelector('li')
+console.log(element.getAttribute('style'))      // background-color: red;
+```
+
+----
+
+**element.setAttribute (props, value)**
+
+- 功能：设置元素上指定 props 的值（覆盖原值）
+- 参数：
+  - `props: string`：指定 props 属性
+  - `value: string`：
+- 返回：无
+
+```tsx
+const element = document.querySelector('li')
+console.log(element.setAttribute('style', 'background-color: black;'))
+```
+
+----
+
+**element.removeAttribute (props)**
+
+- 功能：删除元素上指定 props 的值
+- 参数：
+  - `props: string`：指定 props 属性
+- 返回：无
+
+```tsx
+const element = document.querySelector('li')
+console.log(element.removeAttribute('style'))
+```
+
+-----
+
+**element.className**
+
+- 功能：返回元素 class 属性的值
+- 返回：`string`，class 的 value
+
+```tsx
+<ul>
+  <li class="a b c"></li>
+</ul>
+
+const element = document.querySelector('li')
+console.log(element.className)      // a b c
+```
+
+-----
+
+**element.classList**
+
+- 功能：返回元素所有类名
+- 返回：`DOMTokenList`，类数组对象
+
+```tsx
+<ul>
+  <li class="a b c"></li>
+</ul>
+
+const element = document.querySelector('li')
+console.log(Array.from(element.classList))      // ['a', 'b', 'c']
+```
+
+DOMTokenList 方法：
+
+- add(...class)：为元素添加一个或多个类名，如果指定的类名已存在，则不会添加
+
+  ```tsx
+  const element = document.querySelector('li')
+  element.classList.add('d')
+  ```
+
+  
 
 
 
 ----
 
-#### 操作属性
 
-**getAttribute()**
-
-获取元素的指定属性值
-
-```tsx
-// <div id = "red"></div>
-var redbox = document.getElementById("red");
-var strings = redbox.getAttribute("id");       //返回"red"
-```
-
-------
-
-**setAttribute()**
-
-设置节点属性值
-
-```tsx
-dom.setAttribute(name,value);     //为ele元素修改(新添)name属性的值为value
-```
-
-------
-
-**removeAttribute()**
-
-删除指定的属性
-
-```tsx
-dom.removeAttribute(name);      //删除ele元素的 name 属性
-```
 
 --------
 
@@ -333,7 +539,23 @@ dom.classList.remove('classA')
 
 `removeEventListener(type, listener, useCapture)`
 
-> 只能注销 `addEventListener()` 注册的事件，直接写在元素属性上的事件无法删除
+> 销毁条件：
+>
+> - 只能注销 `addEventListener()` 注册的事件，直接写在元素属性上的事件无法删除
+> - 注销事件的 `listener` 必须和注册时的函数完全一样，因此如果使用匿名函数则无法生效
+
+``` js
+function fn () {
+  console.log('ok')
+}
+
+document.querySelector('body').addEventListener('click', fn)
+document.querySelector('body').removeEventListener('click', fn)
+```
+
+
+
+
 
 
 
