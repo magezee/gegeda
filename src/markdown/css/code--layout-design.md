@@ -262,6 +262,8 @@
 
 ### 固定宽高比
 
+**padding**
+
 实现一个元素在未知自身宽高的情况下实现自身宽高比
 
 > 利用 `padding` 在设定 % 值时，无论高宽都是选择父元素的宽度来做相对值的特性
@@ -270,6 +272,16 @@
 /* 子和父宽度一样，子高度由padding-top或padding-bottom撑开，是父元素的40%，因此可以实现宽高比为5:2 */
 .child {
   padding-bottom: 40%;
+}
+```
+
+**aspect-ratio**
+
+直接设定一个元素宽高比
+
+```less
+.element {
+  aspect-ratio: 5 / 2;
 }
 ```
 

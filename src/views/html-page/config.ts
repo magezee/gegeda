@@ -8,14 +8,24 @@ const sidebarConfig:navConfigType = [
     title: '基本概念',
     children: [
       {
-        id: '元素',
-        title: '元素',
+        id: '元素标签',
+        title: '元素标签',
         path: '/html/basic/element'
       },
       {
-        id: '操作元素',
-        title: '操作元素',
-        path: '/html/basic/html-js'
+        id: '操作DOM',
+        title: '操作DOM',
+        path: '/html/basic/dom'
+      },
+      {
+        id: '元素事件',
+        title: '元素事件',
+        path: '/html/basic/event'
+      },
+      {
+        id: '位置范围',
+        title: '位置范围',
+        path: '/html/basic/location-scope'
       },
     ]
   }
