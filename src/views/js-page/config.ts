@@ -137,6 +137,22 @@ const sidebarConfig:navConfigType = [
       },
     ]
   },
+  {
+    id: 'Typescript',
+    title: 'Typescript',
+    children: [
+      {
+        id: '初始化',
+        title: '初始化',
+        path: '/js/ts/init'
+      },
+      {
+        id: '声明文件',
+        title: '声明文件',
+        path: '/js/ts/declare'
+      },
+    ]
+  },
 ]
 
 
