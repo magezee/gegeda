@@ -151,6 +151,21 @@ const sidebarConfig:navConfigType = [
         title: '声明文件',
         path: '/js/ts/declare'
       },
+      {
+        id: '代码结构',
+        title: '代码结构',
+        path: '/js/ts/code-structure'
+      },
+      {
+        id: '装饰器',
+        title: '装饰器',
+        path: '/js/ts/decorator'
+      },
+      {
+        id: '类型',
+        title: '类型',
+        path: '/js/ts/type'
+      },
     ]
   },
 ]
