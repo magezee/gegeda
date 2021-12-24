@@ -20,7 +20,9 @@ const lulu = new Animal('lulu')
 lulu.say()      // I am lulu
 ```
 
-**抽象类**
+------
+
+#### 抽象
 
 使用 `abstract class` 关键字定义一个抽象类，其作用是规范子类内容
 
@@ -43,8 +45,6 @@ class Cat extends Animal {
   }
 }
 ```
-
-
 
 -----
 
@@ -181,7 +181,7 @@ const jcak: Iperson = {
 }
 ```
 
-**继承**
+#### 继承
 
 ```tsx
 interface Iperson {
@@ -205,6 +205,46 @@ const jcak: IpersonAction = {
 
 
 -----
+
+### 函数
+
+```tsx
+// 普通函数
+function fn(x: number): number {
+  return x
+}
+
+// 箭头函数
+const fn_ = (x: number): number => {
+  return x
+}
+```
+
+#### 重载
+
+函数重载的目的是为了让一个同名函数可以适配多个规则，写法是多个函数规则，和最终匹配一个函数实现
+
+> 写函数重载的目的是未了可以方便看出这个函数拥有多套规则
+
+```tsx
+function fn(x: number, y: string): void
+function fn(x: number): number
+function fn(x: number, y?: string): void | number {
+  if(y) {
+    console.log('fn1 is running')
+  } else {
+    console.log('fn2 is running')
+    return x
+  }
+} 
+
+fn(1, '2')    // fn1 is running
+fn(1)         // fn2 is running
+```
+
+
+
+------
 
 ### 枚举
 
@@ -293,5 +333,83 @@ var Direction;
     Right: 3 
   }
 */
+```
+
+
+
+----
+
+### 变量
+
+#### !和?
+
+**! 的规则**
+
+- 用在变量前，表示取反
+- 用在变量后，使 `null` 和 `undefined` 类型可以赋值给其他类型并通过编译，表示告诉编译器这里有值
+
+```tsx
+let x:number
+
+x = null         // 无法通过编译
+x = undefined    // 无法通过编译
+
+x = null!
+x = undefined!
+```
+
+一般用于可选数据中
+
+```tsx
+function fn(params?: number) {
+  const x: number = params     // 报错:因为params可选，因此类型实际为number|undefined,不能直接传给number
+  const y: number = params!
+}
+```
+
+> 如果存在空情况的判断并赋具体值时，可以不用 `!`
+
+```tsx
+function fn(params?: number) {
+  const x: number = params || 1     
+}
+```
+
+-----
+
+**? 的规则**
+
+- 表示可选值
+
+```tsx
+interface Iobj{
+  x: number,
+  y?: string      // 表示y为非必须值
+}
+
+const obj: Iobj = {
+  x: 1
+}
+```
+
+- 非空判断，表示当去深层访问对象时，表示有值的时候才继续往下访问
+
+```tsx
+function fn(params?: { x: number }) {
+  let m = params.x              // 报错:由于paramas可选,因此可能为undefined,undefined.x会导致报错
+  let n = params?.x
+
+  let x: number = params?.x     // 报错:不能将类型number|undefined赋值number
+  let y: number = params?.x!
+}
+```
+
+>但是该用法只能用于读操作，因为无法为一个可能为空的属性进行赋值，如果需要写入，则需要类型断言
+
+```tsx
+function fn(params?: { x: number }) {
+  params?.x = 1;    // 报错:无法对可选属性赋值
+  (params as { x: number}).x = 1
+}
 ```
 

@@ -27,10 +27,15 @@ let a = true
 a = 1     // 报错，无法将number赋值给boolean
 ```
 
-返回类型：在基本用法中 `typeof` 会返回一个该变量的数据类型，但是用在类型中时，表示该变量的类型
+返回类型：在基本用法中 `typeof` 会返回一个该变量的类型标志，但是用在类型中时，表示取该变量的类型
 
 ```tsx
+const num = 1
 
+type m = typeof num
+type T = m | string
+
+const x = '1'
 ```
 
 类型别名：使用 `type` 声明一个类型变量
@@ -84,12 +89,10 @@ const getLength = (target: string | number): number => {
 
 ```tsx
 const getLength = (target: string | number): number => {
-  const str = target as string
-  const num = target as number
-  if(str.length) {
-    return str.length
+  if((target as string).length) {
+    return (target as string).length
   } else {
-    return num.toString().length
+    return (target as number).toString().length
   }
 }
 ```
@@ -104,5 +107,164 @@ const getLength = (target: string | number): number => {
 
 
 
- 
+----
+
+### 泛型
+
+#### 功能
+
+泛型的作用在单次使用的时候才去指明具体的类型，这样就可以封装更加灵活的代码
+
+```tsx
+function fn<T>(parmas: T): T {
+  return parmas
+}
+
+fn<number>(1)    
+fn<string>('1')
+fn<boolean>(1)		 // 类型number无法赋予boolean
+```
+
+泛型使用 `<>` 来进行标志，有常用几个字母表示特定意思：
+
+- `T`：代表 Type，用于定义泛型时通用的第一个任意类型变量名称
+- `U`：扩展任意类型，用于第二个任意类型变量名称
+- `S`：扩展任意类型，用于第三个任意类型变量名称
+- `K`：代表 Key，用于表示对象键类型
+- `V`：代表 Value，用于表示对象值类型
+- `E`：代表 Element，用于表示元素类型
+
+```tsx
+function fn<T, U>(x: T, y: U): [T, U] {
+  return [x, y]
+}
+
+let result = fn<string, number>('1', 2)
+result = [1, '2']    // 报错：result为[string,number]类型
+```
+
+> 实际上浏览器会根据单次传入的第一次值来确定泛型的类型，而不需要我们显示定义
+
+```tsx
+function fn<T, U>(x: T, y: U): [U, T] {
+  return [y, x]
+}
+
+const result = fn('1', 2)
+```
+
+> 当编译器无法根据条件推测出泛型的具体类型时，会指定为 `unknown`，如果不想要这种情况，可以手动地在泛型定义时指定一个默认类型，这样编译器如果无法判断类型时，不会为 `unknow` 而会是指定的默认类型
+
+```tsx
+function fn<T = number>(parms?:T):T | undefined {
+  return parms
+}
+
+function fn_<T>(parms?:T):T | undefined {
+  return parms
+}
+
+
+function takeData(parms: number | undefined) { }
+
+const result = fn()
+const result_ = fn_()
+takeData(result)          
+takeData(result_)          // 报错:类型unknown不能赋给类型number|undefined
+```
+
+泛型类型可以继承规则
+
+```tsx
+type t = Array<any>
+
+function fn<T extends t>(arg: T): void {
+  arg.map(item => item)
+  
+}
+
+function fn_<T>(arg: T): void {
+  arg.map(item => item)     // 报错：类型T上不存在map
+}
+```
+
+
+
+-----
+
+#### 技巧
+
+**泛型类**
+
+```tsx
+class Queue<T> {
+  data: Array<T> = []
+  push(item: T) {
+    return this.data.push(item)
+  }
+}
+
+// 在实例化的时候声明类的泛型所指数据类型
+const queue1 = new Queue<number>()
+const queue2 = new Queue<boolean>()
+
+queue1.push(3)
+queue1.push(true)   // 报错
+```
+
+----
+
+**泛型接口**
+
+```tsx
+interface Idemo<K, V> {
+  key: K,
+  value: V
+}
+
+const demo: Idemo<boolean, number> = {
+  key: true,
+  value: 123
+}
+```
+
+-----
+
+**泛型函数**
+
+```tsx
+// 普通函数
+function fn<T>(parmas: T): T {
+  return parmas
+}
+
+// 箭头函数
+const fn = <T>(parmas: T): T => {
+  return parmas
+}
+```
+
+如果多个函数拥有一套相似的入参和返回结果，可以使用接口去规范多个函数
+
+```tsx
+interface IPlus<T> {
+    (a: T, b: T): T
+}
+function plus(a: number, b: number): number {
+    return a + b;
+}
+function connect(a: string, b: string): string {
+    return a + b;
+}
+
+const funPlus: IPlus<number> = plus;
+const funConnect: IPlus<string> = connect;
+
+// 如果不用泛型接口，想要规范的给变量赋予函数时，应该这样写，使用泛型接口可以省了很多代码
+const funPlus: (a: string, b: string) => string = plus;
+```
+
+
+
+-----
 

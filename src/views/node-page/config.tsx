@@ -82,6 +82,11 @@ const sidebarConfig:navConfigType = [
         path: '/node/module/koishi'
       },
       {
+        id: 'puppeteer',
+        title: 'puppeteer',
+        path: '/node/module/puppeteer'
+      },
+      {
         id: 'webpack相关',
         title: 'webpack相关',
         path: '/node/module/webpack'

@@ -166,6 +166,11 @@ const sidebarConfig:navConfigType = [
         title: '类型',
         path: '/js/ts/type'
       },
+      {
+        id: '类型体操',
+        title: '类型体操',
+        path: '/js/ts/type-technique'
+      },
     ]
   },
 ]

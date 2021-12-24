@@ -441,6 +441,51 @@ result.then((data) => {
 
 ### 使用技巧
 
+#### 处理请求
+
+一般封装的请求库都已经将请求过程封装成了一个 promise，可以直接 `await` 拿到返回数据就行
+
+```tsx
+const axios = require('axios')
+
+const async fn = () => {
+  const result = await axios.get('http://www.baidu.com')
+  console.log(result)
+}
+```
+
+如果需要在 promise 的链式结构中去使用
+
+```tsx
+// 异步函数写法
+const p = new Promise(async (resolve) => {
+  const result = await axios.get('http://www.baidu.com')
+  resolve(result)
+  
+})
+
+const fn = async () => {
+  const result = await p
+  console.log(result)
+}
+```
+
+```tsx
+// 链式写法
+const p =  new Promise((resolve) => {
+  axios.get('http://www.baidu.com').then((res) => {
+    resolve(res)
+  })
+})
+
+const fn = async () => {
+  const result = await p
+  console.log(result)
+}
+```
+
+------
+
 #### 延时函数
 
 使用 promise 制作一个延时函数可以放在 promise 任务链或 async 函数中来阻塞异步操作
