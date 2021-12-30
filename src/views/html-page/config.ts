@@ -28,6 +28,17 @@ const sidebarConfig:navConfigType = [
         path: '/html/basic/location-scope'
       },
     ]
+  },
+  {
+    id: 'Canvas',
+    title: 'Canvas',
+    children: [
+      {
+        id: '操作图片',
+        title: '操作图片',
+        path: '/html/canvas/image'
+      },
+    ]
   }
 ]
 
