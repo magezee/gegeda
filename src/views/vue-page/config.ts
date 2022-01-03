@@ -66,6 +66,23 @@ const sidebarConfig:navConfigType = [
     ]
   },
   {
+    id: 'Vue3',
+    title: 'Vue3',
+    children: [
+      {
+        id: '初始化',
+        title: '初始化',
+        path: '/vue/vue3/init'
+      },
+      {
+        id: '数据',
+        title: '数据',
+        path: '/vue/vue3/data'
+      },
+      
+    ]
+  },
+  {
     id: '代码技巧',
     title: '代码技巧',
     children: [
