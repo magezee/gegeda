@@ -75,9 +75,14 @@ const sidebarConfig:navConfigType = [
         path: '/vue/vue3/init'
       },
       {
-        id: '数据',
-        title: '数据',
-        path: '/vue/vue3/data'
+        id: '组合逻辑',
+        title: '组合逻辑',
+        path: '/vue/vue3/logic'
+      },
+      {
+        id: '视图更新',
+        title: '视图更新',
+        path: '/vue/vue3/update-view'
       },
       
     ]
