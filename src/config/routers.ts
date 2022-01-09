@@ -67,6 +67,14 @@ const routers: routerConfigType = [
     compoment: React.lazy(() => import('../views/synthesize-page'))
   },
 
+  // > 游戏开发相关
+  {
+    id: 'c-sharp',
+    exact: false,
+    path: '/c-sharp',
+    compoment: React.lazy(() => import('../views/c-sharp-page'))
+  },
+
 
   // > 其他分享部分路由
   {

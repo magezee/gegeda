@@ -4,8 +4,8 @@ import { navConfigType } from 'src/constant/types'
 
 const navConfig:navConfigType = [
   {
-    id: 'docs',
-    title: '前端资料',
+    id: 'front end',
+    title: '前端开发',
     children: [
       {
         id: 'js',
@@ -51,6 +51,17 @@ const navConfig:navConfigType = [
         id: 'synthesize',
         title: '综合技能',
         path: '/synthesize/linux/instructions'
+      },
+    ]
+  },
+  {
+    id: 'game',
+    title: '游戏开发',
+    children: [
+      {
+        id: 'C#',
+        title: 'C#',
+        path: '/c-sharp/env/namespace'
       },
     ]
   },
