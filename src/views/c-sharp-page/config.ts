@@ -8,6 +8,11 @@ const sidebarConfig:navConfigType = [
     title: '执行环境',
     children: [
       {
+        id: '编译器',
+        title: '编译器',
+        path: '/c-sharp/env/compiler'
+      },
+      {
         id: '命名空间',
         title: '命名空间',
         path: '/c-sharp/env/namespace'

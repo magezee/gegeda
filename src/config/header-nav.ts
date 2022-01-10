@@ -61,7 +61,7 @@ const navConfig:navConfigType = [
       {
         id: 'C#',
         title: 'C#',
-        path: '/c-sharp/env/namespace'
+        path: '/c-sharp/env/compiler'
       },
     ]
   },
