@@ -1,6 +1,6 @@
 import React from 'react'
 import RenderMd from 'src/components/render-md'
-import mdData from 'markdown/vue/technique--class-component.md'
+import mdData from 'markdown/vue/ts--class-component.md'
 
 
 const VueTypescript__:React.FC = () => {

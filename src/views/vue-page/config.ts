@@ -88,13 +88,18 @@ const sidebarConfig:navConfigType = [
     ]
   },
   {
-    id: '代码技巧',
-    title: '代码技巧',
+    id: 'Ts写法',
+    title: 'Ts写法',
     children: [
+      {
+        id: '类型引入',
+        title: '类型引入',
+        path: '/vue/ts/type'
+      },
       {
         id: '类组件',
         title: '类组件',
-        path: '/vue/technique/class-component'
+        path: '/vue/ts/class-component'
       },
     ]
   }

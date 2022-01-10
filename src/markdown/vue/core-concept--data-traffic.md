@@ -442,15 +442,12 @@ const getters = {
 
 ```tsx
 const moduleA = {
-  // 如果要用mapXXX映射函数，则这里必须要设置该属性为true才能让其识别
-  namespace: true,	
   actions: {...},
   mutations: {...},
   state: {...}
 }
 
-const moduleB = {
-  namespace: true,           
+const moduleB = {          
   actions: {...},
   mutations: {...},
   state: {...}
@@ -464,36 +461,84 @@ export default new Vuex.Store({
 })
 ```
 
-> 以之前的数据全放在 moduleA 中为例
+**命名空间**
+
+默认情况下，所有的模块的 action、mutation 等属性都是注册在同一个命名空间下，即使用时是不分模块的，只有 state 才会具体细分
+
+```tsx
+// 注册
+const moduleA = {
+  namespaced: true,
+  actions: {
+    add(context, value) {
+      context.commit('ADD', value)
+    },
+  }
+  mutations: {
+    ADD(state, value) {
+      state.count += value
+    }
+  },
+  state: () => ({ count: 0 })
+}
+  
+// 使用
+this.$store.dispatch('add', 1)
+this.$store.commit('ADD', 1)
+this.$store.state.moduleA.count
+```
+
+这样就会碰到一个问题，如果另外的模块也具有 `add` 和 `ADD` 的 action 和 mutation，则会互相影响，为了避免这种情况，引入了命名空间
+
+使用直接在模块的 `namespaced` 中声明即可
+
+> 注意是 `namespaced` 而不是 `namespace` !!!!
+
+```tsx
+// 注册
+const moduleA = {
+  namespaced: true,
+  actions: {...}
+  mutations: {...},
+  state: () => ({...})
+  }
+}
+  
+// 使用
+this.$store.dispatch('moduleA/add', 1)
+this.$store.commit('moduleA/ADD', 1)
+this.$store.state.moduleA.count
+```
+
+ 使用映射
 
 ```html
 <!-- 映射前 -->
 <template>
   <p>{{ $store.state.moduleA.count }}</p>
-  <p>{{ $store.getters.moduleA.square }}</p>
 </template>
 
 <!-- 映射后 -->
 <template>
   <p>{{ count }}</p>
-  <p>{{ square }}</p>
 </template>
 
 <script>
-  import { mapState, mapGetters } from 'vuex'
+  import { mapState } from 'vuex'
   
 	export default {
     // other...
     computed: {
       // 需要在映射方法的第一个参数中填入模块名
       ...mapState('moduleA', ['count']),
-      ...mapGetters('moduleA', ['square'])
     }
   }
 </script>
 ```
 
-另外两个映射方式同理
+> 另外两个映射方式同理
+
+存在命名空间的情况下，在 action 的 `context.state` 中获取是是该命名空间下模块的 state，如果想获取到全局的 state 可以使用 `context.rootState`，如果不分模块，这两个完全相同
 
 
 
