@@ -389,3 +389,7 @@ const add = (value: number) => {
 
 如果没必要，就不要使用模块，徒增很多代码量，看着很烦
 
+> 虽然 vuex 提供了 `useStore()` 方便在外部直接生成 store，但是该 store 会失去类型，因此不是很好用
+
+
+
