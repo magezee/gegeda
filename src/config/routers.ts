@@ -74,7 +74,12 @@ const routers: routerConfigType = [
     path: '/c-sharp',
     compoment: React.lazy(() => import('../views/c-sharp-page'))
   },
-
+  {
+    id: 'unity',
+    exact: false,
+    path: '/unity',
+    compoment: React.lazy(() => import('../views/unity-page'))
+  },
 
   // > 其他分享部分路由
   {
