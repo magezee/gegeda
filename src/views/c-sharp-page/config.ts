@@ -29,6 +29,17 @@ const sidebarConfig:navConfigType = [
         path: '/c-sharp/data/type'
       },
     ]
+  },
+  {
+    id: '代码技巧',
+    title: '代码技巧',
+    children: [
+      {
+        id: '委托',
+        title: '委托',
+        path: '/c-sharp/code/delegate'
+      },
+    ]
   }
 ]
 

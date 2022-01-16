@@ -18,6 +18,7 @@ VSCode 是可以支持 Unity 的脚本编写的，因此没有必要在 `Unity H
 
 - Debugger for Unity
 - Unity Tools
+- Unity Code Snippets
 
 **Uinty 设置**
 

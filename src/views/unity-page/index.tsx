@@ -4,10 +4,10 @@ import { sidebarConfig, subRouters } from './config'
 
 
 
-const VuePage: React.FC = () => {
+const UnityPage: React.FC = () => {
   return (
-    <RenderDataPage sidebarConfig={sidebarConfig}  subRouters={subRouters} sidebarTitle='Vue文档'/>
+    <RenderDataPage sidebarConfig={sidebarConfig}  subRouters={subRouters} sidebarTitle='Untiy文档'/>
   )
 }
 
-export default VuePage
+export default UnityPage

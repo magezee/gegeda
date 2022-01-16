@@ -31,6 +31,49 @@ class Script : MonoBehaviour {
 
 ### 生命周期
 
+Unity 的每个游戏脚本都具有相同的生命周期
+
+**阶段**
+
+初始化阶段：
+
+- Awake：在创建游戏对象时立即执行（即使脚本被禁用也会执行）
+- Start：在游戏对象执行脚本时立即执行（脚本被禁用时不执行）
+
+更新阶段：
+
+- FixedUpdate：每隔固定时间都会执行一遍（默认 0.02s，可在项目设置的时间项中进行更改，一般不改）
+- Update：每渲染帧执行一遍，执行的具体时间由使用机器性能决定
+- LateUpdate：在 Update 执行完毕后立即执行
+- OnGuI：在渲染和处理 GUI 事件时被调用，每渲染帧执行一遍
+
+销毁阶段：
+
+- OnDisable：当游戏对象被禁用时执行
+- onDestroy：当游戏对象被销毁时调用
+
+```ts
+public class Demo : UnityEngine.MonoBehaviour {
+  private void Awake() {}
+  private void Start() {}
+
+  private void FixedUpdate() {}
+  private void Update() {}
+  private void LateUpdate() {}
+  private void OnGUI() {}
+
+  private void OnDestroy() {}
+  private void OnDisable() {}
+}
+```
+
+**使用场景**
+
+- Awake：主要用于游戏开始前初始化变量和游戏状态
+- Start：
+- FixedUpdate：主要用于对一些物理引擎的计算（防止不同电脑上计算有误
+- Update：主要用于监听玩家操作
+- LateUpdate：主要用于玩家操作反馈后紧跟着的副作用
 
 
 
@@ -38,6 +81,7 @@ class Script : MonoBehaviour {
 
 
 
+------
 
 ### 数据控制
 

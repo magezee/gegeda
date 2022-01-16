@@ -13,6 +13,11 @@ const sidebarConfig:navConfigType = [
         path: '/unity/script/concept'
       },
       {
+        id: '事件',
+        title: '事件',
+        path: '/unity/script/event'
+      },
+      {
         id: '物体行为',
         title: '物体行为',
         path: '/unity/script/action'
