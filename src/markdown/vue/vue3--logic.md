@@ -193,6 +193,24 @@ const { fatherData } = withDefaults(defineProps<IProps>(), {
 })
 ```
 
+> 如果是引用类型的数据，则需要使用函数返回的形式
+
+```tsx
+import { defineProps, withDefaults } from 'vue'
+
+interface IProps {
+  fatherData?: {
+    num: number
+  }
+}
+
+const { fatherData } = withDefaults(defineProps<IProps>(), {
+  fatherData: () => ({
+    num: 1
+  })
+})
+```
+
 
 
 -----
