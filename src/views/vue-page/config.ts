@@ -84,6 +84,11 @@ const sidebarConfig:navConfigType = [
         title: '视图更新',
         path: '/vue/vue3/update-view'
       },
+      {
+        id: '代码场景',
+        title: '代码场景',
+        path: '/vue/vue3/code-scene'
+      },
       
     ]
   },
